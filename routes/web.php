@@ -1,18 +1,21 @@
 <?php
 
+use App\Infrastructure\Telegram\Contracts\BotManager;
+use App\Models\Room;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-Route::get('/', function () {
-    return view('welcome');
+Route::get('', function () {
+   return view('welcome');
 });
+
+Route::any('/webhook/telegram/room/{room}', function (\Illuminate\Http\Request $request, BotManager $bots, Room $room) {
+    logger()->debug('telegram', $request->all());
+
+    $bots->forRoom($room)->handleCommand();
+})->name('telegram.webhook.room');
+
+Route::any('/webhook/telegram/manager', function (\Illuminate\Http\Request $request, BotManager $bots) {
+    logger()->debug('telegram', $request->all());
+
+    $bots->forManager()->handleCommand();
+})->name('telegram.webhook.manager');
