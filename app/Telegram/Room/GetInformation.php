@@ -30,12 +30,21 @@ class GetInformation extends Command
             return $this->getInformation($room);
         });
 
-        $this->bot->reply($information);
+        if ($room->hasAccess($this->getUser()) && Gate::allows('show', $room)) {
+            $information['Points GeoJson'] = route('room.points', $room);
+            $information['Points map'] = route('map', $room);
+        }
+
+        $this->bot->reply(
+            collect($information)->map(function ($value, $key) {
+                return "{$key}: *{$value}*";
+            })->implode("\n")
+        );
     }
 
-    protected function getInformation(Room $room): string
+    protected function getInformation(Room $room): array
     {
-        $rows = [
+        return [
             'ID' => $room->uuid,
             'Title' => $room->title,
             'Description' => $room->description,
@@ -45,14 +54,5 @@ class GetInformation extends Command
             'Password required' => $room->hasPassword() ? 'Yes' : 'No',
             'Last activity' => $room->lastActivity()
         ];
-
-        if ($room->isOwner($this->getUser()) && Gate::allows('show', $room)) {
-            $rows['Points GeoJson'] = route('room.points', $room);
-            $rows['Points map'] = route('map', $room);
-        }
-
-        return collect($rows)->map(function ($value, $key) {
-            return "{$key}: *{$value}*";
-        })->implode("\n");
     }
 }
