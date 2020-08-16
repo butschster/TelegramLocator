@@ -24,6 +24,8 @@ class RegisterManagerCommand extends Command
 
     public function handle(BotManager $bots)
     {
-        $bots->registerWebhookForManager();
+        $url = $bots->registerWebhookForManager();
+
+        $this->info(sprintf('Webhook [%s] registered.', $url));
     }
 }

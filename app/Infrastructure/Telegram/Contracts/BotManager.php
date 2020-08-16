@@ -25,11 +25,13 @@ interface BotManager
     /**
      * Регистрация телеграм бота для комнаты
      * @param Room $room
+     * @return string
      */
-    public function registerWebhookForRoom(Room $room): void;
+    public function registerWebhookForRoom(Room $room): string;
 
     /**
      * Регистрация телеграм бота для менеджеров
+     * @return string
      */
-    public function registerWebhookForManager(): void;
+    public function registerWebhookForManager(): string;
 }

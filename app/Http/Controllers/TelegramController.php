@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Resources\RoomPointResource;
 use App\Infrastructure\Telegram\Contracts\BotManager;
 use App\Models\Room;
+use Illuminate\Http\Request;
 
 class TelegramController extends Controller
 {

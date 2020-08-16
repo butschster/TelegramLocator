@@ -3,7 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" id="94d615e8-3181-4b4e-9e3a-3702ed87962a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Console/Commands/Telegram/RegisterManagerCommand.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Console/Commands/Telegram/RegisterManagerCommand.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Exceptions/Handler.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Exceptions/Handler.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TelegramController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TelegramController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Infrastructure/Telegram/BotManager.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Infrastructure/Telegram/BotManager.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Infrastructure/Telegram/Contracts/BotManager.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Infrastructure/Telegram/Contracts/BotManager.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_08_13_000000_init_postgis.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_08_13_000000_init_postgis.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -221,7 +228,7 @@
       <workItem from="1597329815572" duration="24167000" />
       <workItem from="1597385200478" duration="18906000" />
       <workItem from="1597411582739" duration="3535000" />
-      <workItem from="1597564401811" duration="6599000" />
+      <workItem from="1597564401811" duration="9118000" />
     </task>
     <servers />
   </component>
@@ -293,9 +300,9 @@
       <screen x="1920" y="0" width="2560" height="1440" />
     </state>
     <state x="2863" y="349" width="672" height="678" key="search.everywhere.popup/1920.0.2560.1440/0.27.1920.1053@1920.0.2560.1440" timestamp="1597332969262" />
-    <state x="2925" y="646" width="540" height="181" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1597396547584">
+    <state x="2925" y="646" width="540" height="181" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1597574723411">
       <screen x="1920" y="0" width="2560" height="1440" />
     </state>
-    <state x="2925" y="646" width="540" height="181" key="vcs.readOnlyHandler.ReadOnlyStatusDialog/1920.0.2560.1440/0.27.1920.1053@1920.0.2560.1440" timestamp="1597396547584" />
+    <state x="2925" y="646" width="540" height="181" key="vcs.readOnlyHandler.ReadOnlyStatusDialog/1920.0.2560.1440/0.27.1920.1053@1920.0.2560.1440" timestamp="1597574723411" />
   </component>
 </project>

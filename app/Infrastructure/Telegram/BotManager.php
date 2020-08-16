@@ -71,9 +71,9 @@ class BotManager implements Contracts\BotManager
      * @param Room $room
      * @throws GuzzleException
      */
-    public function registerWebhookForRoom(Room $room): void
+    public function registerWebhookForRoom(Room $room): string
     {
-        $this->registerWebhook(
+        return $this->registerWebhook(
             $room->telegram_token,
             route('telegram.webhook.room', $room)
         );
@@ -83,9 +83,9 @@ class BotManager implements Contracts\BotManager
      * Регистрация вебхука для менеджера
      * @throws GuzzleException
      */
-    public function registerWebhookForManager(): void
+    public function registerWebhookForManager(): string
     {
-        $this->registerWebhook(
+        return $this->registerWebhook(
             $this->managerToken,
             route('telegram.webhook.manager')
         );
@@ -95,14 +95,17 @@ class BotManager implements Contracts\BotManager
      * Регистрация вебхука для переданного токена и URL
      * @param string $token
      * @param string $url
+     * @return string
      * @throws GuzzleException
      */
-    protected function registerWebhook(string $token, string $url): void
+    protected function registerWebhook(string $token, string $url): string
     {
-        $url = 'https://api.telegram.org/bot' . $token . '/setWebhook?url=' . $url;
+        $apiUrl = 'https://api.telegram.org/bot' . $token . '/setWebhook?url=' . $url;
 
         try {
-            $this->http->request('get', $url);
+            $this->http->request('get', $apiUrl);
+
+            return $url;
         } catch (ClientException $e) {
             throw new TelegramWebhookException($e->getMessage());
         }

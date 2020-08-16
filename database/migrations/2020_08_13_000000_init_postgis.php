@@ -16,7 +16,7 @@ class InitPostgis extends Migration
     {
         try {
             // Проверяем наличие расширения Postgis. Если расширение отсутсвует, то включаем его
-            $select = DB::select('select PostGIS_full_version()');
+            DB::select('select PostGIS_full_version()');
         } catch (\Exception $e) {
             Schema::enablePostgis();
         }
