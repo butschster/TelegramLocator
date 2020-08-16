@@ -13,16 +13,18 @@ class RoomPointResource extends JsonResource
     /**
      * Transform the resource into an array.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return array
      */
     public function toArray($request)
     {
         return [
-            'lat' => $this->location->getLat(),
-            'lng' => $this->location->getLng(),
-            'username' => $this->username,
-            'created_at' => $this->updated_at
+            'geometry' => [
+                'coordinates' => [$this->location->getLng(), $this->location->getLat()],
+                'type' => 'Point'
+            ],
+            'properties' => [],
+            'type' => 'Feature',
         ];
     }
 }

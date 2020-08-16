@@ -17,7 +17,7 @@ abstract class Command implements Contracts\Command
     protected BotMan $bot;
     private InputDefinition $definition;
     protected ?string $name = null;
-    private TelegramUser $user;
+    private ?TelegramUser $user = null;
 
     public function __construct(BotMan $bot)
     {
@@ -141,9 +141,18 @@ abstract class Command implements Contracts\Command
 
     public function args(): InputInterface
     {
-        return new StringInput(
+        $args = new StringInput(
             $this->bot->getMessage()->getText(),
             $this->definition
         );
+
+        $args->validateCommand($this);
+
+        return $args;
+    }
+
+    public function argsRules(): array
+    {
+        return [];
     }
 }

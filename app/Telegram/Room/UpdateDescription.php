@@ -29,4 +29,11 @@ class UpdateDescription extends ManagerCommand
 
         $this->bot->reply('Room description updated.');
     }
+
+    public function argsRules(): array
+    {
+        return [
+            'description' => ['string'],
+        ];
+    }
 }

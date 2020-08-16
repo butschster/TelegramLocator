@@ -13,7 +13,7 @@ use MStaack\LaravelPostgis\Geometries\Point as GeoPoint;
 class Point extends Model
 {
     /**
-     * Получение списка точекЮ проставленных за последние 24 часа
+     * Получение списка точек, проставленных за последние 24 часа
      *
      * @param Room $room
      * @return Collection
@@ -26,6 +26,19 @@ class Point extends Model
     }
 
     /**
+     * Получение кол-ва точек, проставленных за последние 24 часа
+     *
+     * @param Room $room
+     * @return int
+     */
+    public static function countForRoom(Room $room): int
+    {
+        return static::filterByRoom($room)
+            ->notExpired()
+            ->count();
+    }
+
+    /**
      * Добавление или обновление существующей точки для телеграм пользователя
      * @param Room $room
      * @param User $user
@@ -34,8 +47,8 @@ class Point extends Model
      */
     public static function storeForRoom(Room $room, User $user, Location $location): self
     {
-        return static::where('room_uuid', $room->uuid)
-            ->updateOrCreate([
+        return static::updateOrCreate([
+                'room_uuid' => $room->uuid,
                 'owner_hash' => $user->getHash(),
             ], [
                 'location' => new GeoPoint($location->getLatitude(), $location->getLongitude()),

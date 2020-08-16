@@ -5,6 +5,8 @@ namespace App\Telegram\Room;
 use App\Infrastructure\Telegram\ManagerCommand;
 use App\Infrastructure\Telegram\StringInput;
 use App\Models\Room;
+use App\Validation\Rules\Latitude;
+use App\Validation\Rules\Longitude;
 
 class UpdateTitle extends ManagerCommand
 {
@@ -28,5 +30,12 @@ class UpdateTitle extends ManagerCommand
         ]);
 
         $this->bot->reply('Room title updated.');
+    }
+
+    public function argsRules(): array
+    {
+        return [
+            'title' => ['string', 'max:255'],
+        ];
     }
 }

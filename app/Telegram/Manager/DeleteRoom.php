@@ -10,12 +10,12 @@ class DeleteRoom extends ManagerCommand
 {
     public function signature(): string
     {
-        return '/rmroom {token : Telegarm bot API token}';
+        return '/rmroom {token : Telegram bot API token}';
     }
 
     public function description(): string
     {
-        return 'Delete room and all data';
+        return 'Delete room and all points';
     }
 
     public function handle(StringInput $input): void

@@ -5,13 +5,15 @@ namespace App\Telegram\Room;
 use App\Infrastructure\Telegram\ManagerCommand;
 use App\Infrastructure\Telegram\StringInput;
 use App\Models\Room;
+use App\Validation\Rules\Latitude;
+use App\Validation\Rules\Longitude;
 use MStaack\LaravelPostgis\Geometries\Point;
 
 class UpdateRoomLocation extends ManagerCommand
 {
     public function signature(): string
     {
-        return '/setlocation {lat : Latitude} {lon : Longitude}';
+        return '/setlocation {lat : Latitude} {lng : Longitude}';
     }
 
     public function description(): string
@@ -27,11 +29,19 @@ class UpdateRoomLocation extends ManagerCommand
         $room->update([
             'location' => new Point(
                 $input->getArgument('lat'),
-                $input->getArgument('lon')
+                $input->getArgument('lng')
             ),
         ]);
 
         $this->bot->reply('Room location updated.');
+    }
+
+    public function argsRules(): array
+    {
+        return [
+            'lat' => new Latitude(),
+            'lng' => new Longitude()
+        ];
     }
 }
 

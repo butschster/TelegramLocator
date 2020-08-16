@@ -13,7 +13,7 @@ class CreateRoom extends ManagerCommand
 {
     public function signature(): string
     {
-        return '/mkroom {token : Telegarm bot API token}';
+        return '/mkroom {token : Telegram bot API token}';
     }
 
     public function description(): string

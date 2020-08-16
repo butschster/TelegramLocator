@@ -23,23 +23,24 @@ class GetInformation extends Command
         /** @var Room $room */
         $room = $input->getArgument('room');
         $this->checkAuthentication($room);
-        $isAnonymous = $room->is_anonymous ? 'Yes' : 'No';
-        $isPublic = $room->is_public ? 'Yes' : 'No';
-        $hasPassword = $room->hasPassword() ? 'Yes' : 'No';
-        $publicUrl = route('room.points', $room);
 
-        $information = <<<EOL
-ID: {$room->uuid}
-Title: {$room->title}
-Description: {$room->description}
-Total points: {$room->notExpiredPoints()->count()}
-Anonymous: {$isAnonymous}
-Public: {$isPublic}
-Password required: {$hasPassword}
-Last activity: {$room->lastActivity()}
-Public url: {$publicUrl}
-EOL;
+        $rows = [
+            'ID' => $room->uuid,
+            'Title' => $room->title,
+            'Description' => $room->description,
+            'Total points' => Room\Point::getForRoom($room)->count(),
+            'Anonymous' => $room->is_anonymous ? 'Yes' : 'No',
+            'Public' => $room->is_public ? 'Yes' : 'No',
+            'Password required' => $room->hasPassword() ? 'Yes' : 'No',
+            'Last activity' => $room->lastActivity()
+        ];
 
-        $this->bot->reply($information);
+        if ($room->isOwner($this->getUser())) {
+            $rows['Points URL'] = route('room.points', $room);
+        }
+
+        $this->bot->reply(collect($rows)->map(function ($value, $key) {
+            return "{$key}: *{$value}*";
+        })->implode("\n"));
     }
 }

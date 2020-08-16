@@ -27,11 +27,13 @@ class RegisterUser extends Command
             return;
         }
 
-        $user = User::create([
-            'id' => $this->getUser()->getHash(),
-            'username' => $this->getUser()->getUsername()
+        User::create([
+            'id' => $this->getUser()->getHash()
         ]);
 
-        $this->bot->reply(sprintf('Hello %s! Welcome to our service!', $user->username));
+        $this->bot->reply(sprintf(
+            'Hello %s! Welcome to our service! We appreciate your privacy and that\'s why we don\'t store any information about you.',
+            $this->getUser()->getUsername()
+        ));
     }
 }

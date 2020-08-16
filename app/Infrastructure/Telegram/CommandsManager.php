@@ -7,10 +7,14 @@ use Closure;
 use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Support\Collection;
+use Illuminate\Validation\ValidationException;
 
 class CommandsManager
 {
     private BotMan $botMan;
+    /**
+     * @var Collection|\Tightenco\Collect\Support\Collection|Command[]
+     */
     private Collection $commands;
 
     public function __construct(BotMan $botMan, array $commands)
@@ -35,10 +39,13 @@ class CommandsManager
                     throw new AuthorizationException();
                 }
 
+                $args = $command->args();
+
+
                 if ($handler) {
-                    $handler($command, $command->args());
+                    $handler($command, $args);
                 } else {
-                    $command->handle($command->args());
+                    $command->handle($args);
                 }
             });
         }
@@ -46,6 +53,16 @@ class CommandsManager
         $this->botMan->exception(Exception::class, function ($e, BotMan $bot) {
             if ($e instanceof AuthorizationException) {
                 $bot->reply($e->getMessage());
+            } else if($e instanceof ValidationException) {
+                $errors = collect($e->errors())->map(function (array $errors, $field) {
+                    $message = "{$field}\n";
+                    foreach ($errors as $error) {
+                        $message .= " - {$error}\n";
+                    }
+
+                    return $message;
+                })->implode("\n");
+                $bot->reply(sprintf("*Data is not valid*\n```\n%s\n```", $errors));
             } else {
                 $bot->reply(
                     config('app.debug') ? $e->getMessage() : 'Sorry, something went wrong'
@@ -63,7 +80,7 @@ class CommandsManager
     protected function registerHelp(?Closure $filter = null): void
     {
         $this->botMan->hears('/help', function ($bot) use ($filter) {
-            $text = "/help - List of available commands\n";
+            $text = "";
 
             $groupedCommands = $this->commands->groupBy(function ($command) {
                 return $command->forManager() ? "Manager commands" : "User commands";

@@ -13,7 +13,7 @@ class RegisterManagerCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'telegram:register-manager';
+    protected $signature = 'telegram:register-webhooks';
 
     /**
      * The console command description.
@@ -27,5 +27,10 @@ class RegisterManagerCommand extends Command
         $url = $bots->registerWebhookForManager();
 
         $this->info(sprintf('Webhook [%s] registered.', $url));
+
+        Room::get()->each(function (Room $room) use ($bots) {
+            $url = $bots->registerWebhookForRoom($room);
+            $this->info(sprintf('Webhook [%s] registered.', $url));
+        });
     }
 }

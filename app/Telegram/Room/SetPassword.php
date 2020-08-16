@@ -32,4 +32,11 @@ class SetPassword extends ManagerCommand
 
         $this->bot->reply('Password for room set.');
     }
+
+    public function argsRules(): array
+    {
+        return [
+            'password' => ['required', 'string', 'min:1', 'max:128'],
+        ];
+    }
 }

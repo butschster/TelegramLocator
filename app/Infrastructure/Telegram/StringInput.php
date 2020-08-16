@@ -2,6 +2,7 @@
 
 namespace App\Infrastructure\Telegram;
 
+use Illuminate\Support\Facades\Validator;
 use InvalidArgumentException;
 use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Console\Input\InputDefinition;
@@ -64,5 +65,14 @@ class StringInput extends ArgvInput
         }
 
         return $tokens;
+    }
+
+    /**
+     * @param Contracts\Command $command
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    public function validateCommand(Contracts\Command $command)
+    {
+        Validator::make($this->getArguments(), $command->argsRules())->validate();
     }
 }

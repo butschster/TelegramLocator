@@ -39,4 +39,11 @@ class AuthUser extends Command
         $room->addUser($user);
         $this->bot->reply('Authenticated!');
     }
+
+    public function argsRules(): array
+    {
+        return [
+            'password' => ['required', 'string', 'min:1'],
+        ];
+    }
 }

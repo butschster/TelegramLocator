@@ -54,4 +54,10 @@ interface Command
      * @return InputInterface
      */
     public function args(): InputInterface;
+
+    /**
+     * Правила валидации аргументов
+     * @return array
+     */
+    public function argsRules(): array;
 }
