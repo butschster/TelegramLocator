@@ -2,55 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="94d615e8-3181-4b4e-9e3a-3702ed87962a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/TelegramController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Infrastructure/Telegram/StringInput.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Infrastructure/Telegram/User.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Telegram/Room/UpdateRoomLocation.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/deploy.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env.example" beforeDir="false" afterPath="$PROJECT_DIR$/.env.example" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/TelegramLocator.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/TelegramLocator.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/ff211642-0ae8-41be-a8b0-11a46b39d345.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/ff211642-0ae8-41be-a8b0-11a46b39d345.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.phpstorm.meta.php" beforeDir="false" afterPath="$PROJECT_DIR$/.phpstorm.meta.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_ide_helper.php" beforeDir="false" afterPath="$PROJECT_DIR$/_ide_helper.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_ide_helper_models.php" beforeDir="false" afterPath="$PROJECT_DIR$/_ide_helper_models.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Console/Commands/Telegram/RegisterRoomCommand.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Console/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Console/Kernel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Infrastructure/Telegram/BotManager.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Infrastructure/Telegram/BotManager.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Infrastructure/Telegram/Command.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Infrastructure/Telegram/Command.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Infrastructure/Telegram/CommandsManager.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Infrastructure/Telegram/CommandsManager.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Infrastructure/Telegram/Contracts/BotManager.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Infrastructure/Telegram/Contracts/BotManager.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Infrastructure/Telegram/Contracts/Command.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Infrastructure/Telegram/Contracts/Command.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Infrastructure/Telegram/Contracts/ManagerBot.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Infrastructure/Telegram/Contracts/Bot.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Infrastructure/Telegram/Contracts/RoomBot.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Infrastructure/Telegram/ManagerBot.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Infrastructure/Telegram/ManagerBot.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Infrastructure/Telegram/RoomBot.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Infrastructure/Telegram/RoomBot.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Concerns/WithLocation.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Concerns/WithLocation.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Room.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Room.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Room/Point.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Room/Point.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Telegram/Manager/CreateRoom.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Telegram/Manager/CreateRoom.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Telegram/Manager/DeleteRoom.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Telegram/Manager/DeleteRoom.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Telegram/Manager/RegisterUser.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Telegram/Manager/RegisterUser.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Telegram/Room/AuthUser.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Telegram/Room/AuthUser.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Telegram/Room/GetInformation.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Telegram/Room/GetInformation.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Telegram/Room/MakeAnonymous.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Telegram/Room/MakeAnonymous.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Telegram/Room/RemovePassword.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Telegram/Room/RemovePassword.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Telegram/Room/SetPassword.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Telegram/Room/SetPassword.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Telegram/Room/StoreLocation.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Telegram/Room/StoreLocation.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Telegram/Room/UpdateDescription.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Telegram/Room/UpdateDescription.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Telegram/Room/UpdateTitle.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Telegram/Room/UpdateTitle.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/database.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/database.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/telegram.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/telegram.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_08_13_150657_create_room_points_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_08_13_150657_create_room_points_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/channels.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/console.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -268,7 +221,7 @@
       <workItem from="1597329815572" duration="24167000" />
       <workItem from="1597385200478" duration="18906000" />
       <workItem from="1597411582739" duration="3535000" />
-      <workItem from="1597564401811" duration="4570000" />
+      <workItem from="1597564401811" duration="6599000" />
     </task>
     <servers />
   </component>
