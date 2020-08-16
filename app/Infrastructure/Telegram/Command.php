@@ -99,11 +99,11 @@ abstract class Command implements Contracts\Command
     /** @inheritDoc */
     public function help(): string
     {
-        $command = sprintf(
-            "`%s %s` - %s\n",
+        $command = "*{$this->description()}*\n```\n";
+        $command .= sprintf(
+            "%s %s\n",
             $this->name,
-            $this->definition->getSynopsis(),
-            $this->description()
+            $this->definition->getSynopsis()
         );
 
         $args = [];
@@ -115,13 +115,12 @@ abstract class Command implements Contracts\Command
         }
 
         if (!empty($args)) {
-            $command .= "```\n";
-            $command .= "-\n";
             $command .= implode("\n", $args) . "\n";
-            $command .= "```";
         }
 
-        return $command . "-------\n";
+        $command .= "```";
+
+        return $command . "\n";
     }
 
     /**

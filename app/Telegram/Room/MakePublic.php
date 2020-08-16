@@ -11,7 +11,7 @@ class MakePublic extends ManagerCommand
 
     public function signature(): string
     {
-        return '/makepublic';
+        return '/mkpublic';
     }
 
     public function description(): string

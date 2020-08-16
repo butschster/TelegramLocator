@@ -11,7 +11,7 @@ class MakePrivate extends ManagerCommand
 
     public function signature(): string
     {
-        return '/makeprivate';
+        return '/mkprivate';
     }
 
     public function description(): string

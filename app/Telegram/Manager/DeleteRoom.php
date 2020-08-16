@@ -10,7 +10,7 @@ class DeleteRoom extends ManagerCommand
 {
     public function signature(): string
     {
-        return '/rmroom {token : Telegram bot API token}';
+        return '/del {token : Telegram bot API token}';
     }
 
     public function description(): string

@@ -11,7 +11,7 @@ class MakeAnonymous extends ManagerCommand
 
     public function signature(): string
     {
-        return '/makeanonymous';
+        return '/mkanonymous';
     }
 
     public function description(): string
@@ -28,10 +28,6 @@ class MakeAnonymous extends ManagerCommand
             'is_anonymous' => true
         ]);
 
-        $room->points()->update([
-            'username' => null
-        ]);
-
-        $this->bot->reply('Done. All username were cleared.');
+        $this->bot->reply('Done.');
     }
 }

@@ -15,7 +15,7 @@ class RegisterUser extends Command
 
     public function description(): string
     {
-        return 'Register new user';
+        return 'Register as a manager';
     }
 
     public function handle(StringInput $input): void
