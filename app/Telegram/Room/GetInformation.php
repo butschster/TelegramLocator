@@ -5,6 +5,7 @@ namespace App\Telegram\Room;
 use App\Infrastructure\Telegram\Command;
 use App\Infrastructure\Telegram\StringInput;
 use App\Models\Room;
+use Illuminate\Support\Facades\Cache;
 
 class GetInformation extends Command
 {
@@ -24,6 +25,15 @@ class GetInformation extends Command
         $room = $input->getArgument('room');
         $this->checkAuthentication($room);
 
+        $information = Cache::remember('room:info:' . $room->uuid, now()->addMinute(), function () use ($room) {
+            return $this->getInformation($room);
+        });
+
+        $this->bot->reply($information);
+    }
+
+    protected function getInformation(Room $room): string
+    {
         $rows = [
             'ID' => $room->uuid,
             'Title' => $room->title,
@@ -40,8 +50,8 @@ class GetInformation extends Command
             $rows['Points map'] = route('map', $room);
         }
 
-        $this->bot->reply(collect($rows)->map(function ($value, $key) {
+        return collect($rows)->map(function ($value, $key) {
             return "{$key}: *{$value}*";
-        })->implode("\n"));
+        })->implode("\n");
     }
 }
