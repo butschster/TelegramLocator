@@ -28,6 +28,7 @@ return [
             App\Telegram\Room\MakeAnonymous::class,
             App\Telegram\Room\MakePrivate::class,
             App\Telegram\Room\MakePublic::class,
+            App\Telegram\Room\DownloadGeoJson::class,
             App\Telegram\Room\SetPassword::class,
             App\Telegram\Room\RemovePassword::class,
             App\Telegram\Room\AuthUser::class,

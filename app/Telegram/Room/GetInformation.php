@@ -6,6 +6,7 @@ use App\Infrastructure\Telegram\Command;
 use App\Infrastructure\Telegram\StringInput;
 use App\Models\Room;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Gate;
 
 class GetInformation extends Command
 {
@@ -45,7 +46,7 @@ class GetInformation extends Command
             'Last activity' => $room->lastActivity()
         ];
 
-        if ($room->isOwner($this->getUser())) {
+        if ($room->isOwner($this->getUser()) && Gate::allows('show', $room)) {
             $rows['Points GeoJson'] = route('room.points', $room);
             $rows['Points map'] = route('map', $room);
         }
