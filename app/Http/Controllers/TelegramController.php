@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Cache;
 class TelegramController extends Controller
 {
     /**
-     * Получение списка точек за последние 24 часа
+     * Получение списка точек за последние 24 часа в формате GeoJSON
      * @param Request $request
      * @param Room $room
      * @return array
@@ -20,14 +20,12 @@ class TelegramController extends Controller
      */
     public function getPointsForLastDay(Request $request, Room $room)
     {
-        if (!$room->is_public) {
-            throw new AuthorizationException('You don\'t have access to this room.');
-        }
+        $this->authorize('show', $room);
 
-       // return Cache::remember(
-          //  'points:' . $room->uuid,
-        //    now()->addMinute(),
-         //   function () use ($room, $request) {
+        return Cache::remember(
+            'points:' . $room->uuid,
+            now()->addMinute(),
+            function () use ($room, $request) {
                 $response = [
                     'type' => 'FeatureCollection',
                     'features' => RoomPointResource::collection(
@@ -35,12 +33,24 @@ class TelegramController extends Controller
                     )->toArray($request),
                 ];
 
+                if ($room->location) {
+                    $response['center'] = [$room->location->getLng(), $room->location->getLat()];
+                }
+
                 return $response;
-           // });
+            });
     }
 
+    /**
+     * Просмотр карты с метками
+     * @param Room $room
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @throws AuthorizationException
+     */
     public function map(Room $room)
     {
+        $this->authorize('show', $room);
+
         return view('map', [
             'token' => config('services.mapbox.token'),
             'center' => $room->location ? [$room->location->getLat(), $room->location->getLng()] : [],

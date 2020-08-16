@@ -36,7 +36,8 @@ class GetInformation extends Command
         ];
 
         if ($room->isOwner($this->getUser())) {
-            $rows['Points URL'] = route('room.points', $room);
+            $rows['Points GeoJson'] = route('room.points', $room);
+            $rows['Points map'] = route('map', $room);
         }
 
         $this->bot->reply(collect($rows)->map(function ($value, $key) {

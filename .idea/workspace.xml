@@ -1,34 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="94d615e8-3181-4b4e-9e3a-3702ed87962a" name="Default Changelist" comment="- Добавлена возможность указания секретного слова в вебхуки  &#10;- Убрано хранение username из профиля пользователя.&#10;- Добавлено кеширование списка">
-      <change beforePath="$PROJECT_DIR$/.env.example" beforeDir="false" afterPath="$PROJECT_DIR$/.env.example" afterDir="false" />
+    <list default="true" id="94d615e8-3181-4b4e-9e3a-3702ed87962a" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/Telegram/Room/MakePrivate.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Telegram/Room/MakePublic.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Console/Commands/Telegram/RegisterManagerCommand.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Console/Commands/Telegram/RegisterManagerCommand.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TelegramController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TelegramController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Resources/RoomPointResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Resources/RoomPointResource.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Infrastructure/Telegram/Command.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Infrastructure/Telegram/Command.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Infrastructure/Telegram/CommandsManager.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Infrastructure/Telegram/CommandsManager.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Infrastructure/Telegram/Contracts/Command.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Infrastructure/Telegram/Contracts/Command.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Infrastructure/Telegram/ManagerBot.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Infrastructure/Telegram/ManagerBot.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Infrastructure/Telegram/StringInput.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Infrastructure/Telegram/StringInput.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Room/Point.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Room/Point.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Telegram/Manager/CreateRoom.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Telegram/Manager/CreateRoom.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Telegram/Manager/DeleteRoom.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Telegram/Manager/DeleteRoom.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Telegram/Manager/RegisterUser.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Telegram/Manager/RegisterUser.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Telegram/Room/AuthUser.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Telegram/Room/AuthUser.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Providers/AuthServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/AuthServiceProvider.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Telegram/Room/GetInformation.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Telegram/Room/GetInformation.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Telegram/Room/SetPassword.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Telegram/Room/SetPassword.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Telegram/Room/UpdateDescription.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Telegram/Room/UpdateDescription.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Telegram/Room/UpdateRoomLocation.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Telegram/Room/UpdateRoomLocation.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Telegram/Room/UpdateTitle.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Telegram/Room/UpdateTitle.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/services.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/telegram.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/telegram.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/welcome.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/map.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/map.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/map.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -205,7 +188,7 @@
     <property name="DatabaseDriversLRU" value="postgresql" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/Telegram/Room" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -217,16 +200,16 @@
     <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/config" />
-      <recent name="$PROJECT_DIR$/app/Models" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/Telegram/Room" />
       <recent name="$PROJECT_DIR$/app" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/app/Infrastructure/Telegram" />
-      <recent name="$PROJECT_DIR$/app/Telegram/Room" />
       <recent name="$PROJECT_DIR$/app/Models/Concerns" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/config" />
+      <recent name="$PROJECT_DIR$/app/Models" />
     </key>
   </component>
   <component name="RunManager">
@@ -246,7 +229,8 @@
       <workItem from="1597329815572" duration="24167000" />
       <workItem from="1597385200478" duration="18906000" />
       <workItem from="1597411582739" duration="3535000" />
-      <workItem from="1597564401811" duration="21405000" />
+      <workItem from="1597564401811" duration="21669000" />
+      <workItem from="1597599235793" duration="1060000" />
     </task>
     <task id="LOCAL-00001" summary="- Добавлен Sentry в ExceptionsHandler&#10;- Добавлен ответ при регистрации бота для менеджеров&#10;-">
       <created>1597575620611</created>
@@ -255,7 +239,14 @@
       <option name="project" value="LOCAL" />
       <updated>1597575620612</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="- Добавлена возможность указания секретного слова в вебхуки  &#10;- Убрано хранение username из профиля пользователя.&#10;- Добавлено кеширование списка&#10;- Добавлен вывод карты с маркерами&#10;- Добавлена валидация входных параметров">
+      <created>1597592049146</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1597592049146</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -263,7 +254,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="- Добавлен Sentry в ExceptionsHandler&#10;- Добавлен ответ при регистрации бота для менеджеров&#10;-" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Добавлен Sentry в ExceptionsHandler&#10;- Добавлен ответ при регистрации бота для менеджеров&#10;-" />
+    <MESSAGE value="- Добавлена возможность указания секретного слова в вебхуки  &#10;- Убрано хранение username из профиля пользователя.&#10;- Добавлено кеширование списка&#10;- Добавлен вывод карты с маркерами&#10;- Добавлена валидация входных параметров" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Добавлена возможность указания секретного слова в вебхуки  &#10;- Убрано хранение username из профиля пользователя.&#10;- Добавлено кеширование списка&#10;- Добавлен вывод карты с маркерами&#10;- Добавлена валидация входных параметров" />
   </component>
   <component name="WindowStateProjectService">
     <state x="2658" y="391" width="800" height="684" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1597341546812">
@@ -282,14 +274,14 @@
       <screen x="1920" y="0" width="2560" height="1440" />
     </state>
     <state x="2867" y="376" width="646" height="729" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/1920.0.2560.1440/0.27.1920.1053@1920.0.2560.1440" timestamp="1597566935745" />
-    <state x="2933" y="491" width="524" height="491" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1597587038377">
+    <state x="2933" y="491" width="524" height="491" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1597599861859">
       <screen x="1920" y="0" width="2560" height="1440" />
     </state>
-    <state x="2933" y="491" width="524" height="491" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/1920.0.2560.1440/0.27.1920.1053@1920.0.2560.1440" timestamp="1597587038377" />
-    <state x="146" y="88" width="1707" height="955" key="CommitChangelistDialog2" timestamp="1597584206099">
+    <state x="2933" y="491" width="524" height="491" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/1920.0.2560.1440/0.27.1920.1053@1920.0.2560.1440" timestamp="1597599861859" />
+    <state x="146" y="1" width="1707" height="1042" key="CommitChangelistDialog2" timestamp="1597592049072">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state x="146" y="88" width="1707" height="955" key="CommitChangelistDialog2/1920.0.2560.1440/0.27.1920.1053@1920.0.2560.1440" timestamp="1597584206099" />
+    <state x="146" y="1" width="1707" height="1042" key="CommitChangelistDialog2/1920.0.2560.1440/0.27.1920.1053@1920.0.2560.1440" timestamp="1597592049072" />
     <state x="2983" y="491" width="416" height="519" key="FileChooserDialogImpl" timestamp="1597586211462">
       <screen x="1920" y="0" width="2560" height="1440" />
     </state>
@@ -326,10 +318,10 @@
       <screen x="1920" y="0" width="2560" height="1440" />
     </state>
     <state x="2879" y="459" width="641" height="548" key="find.popup/1920.0.2560.1440/0.27.1920.1053@1920.0.2560.1440" timestamp="1597351030138" />
-    <state x="2864" y="342" key="run.anything.popup" timestamp="1597578078619">
+    <state x="2864" y="342" key="run.anything.popup" timestamp="1597599653342">
       <screen x="1920" y="0" width="2560" height="1440" />
     </state>
-    <state x="2864" y="342" key="run.anything.popup/1920.0.2560.1440/0.27.1920.1053@1920.0.2560.1440" timestamp="1597578078619" />
+    <state x="2864" y="342" key="run.anything.popup/1920.0.2560.1440/0.27.1920.1053@1920.0.2560.1440" timestamp="1597599653342" />
     <state x="2863" y="349" width="672" height="678" key="search.everywhere.popup" timestamp="1597578625935">
       <screen x="1920" y="0" width="2560" height="1440" />
     </state>

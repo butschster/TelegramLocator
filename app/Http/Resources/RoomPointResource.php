@@ -23,7 +23,9 @@ class RoomPointResource extends JsonResource
                 'coordinates' => [$this->location->getLng(), $this->location->getLat()],
                 'type' => 'Point'
             ],
-            'properties' => [],
+            'properties' => [
+                'username' => $this->username
+            ],
             'type' => 'Feature',
         ];
     }
