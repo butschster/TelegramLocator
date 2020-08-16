@@ -8,7 +8,7 @@ use App\Telegram\Room\StoreLocation;
 use BotMan\BotMan\BotMan;
 use BotMan\BotMan\Messages\Attachments\Location;
 
-class RoomBot implements Contracts\RoomBot
+class RoomBot implements Contracts\Bot
 {
     private BotMan $botMan;
     private Room $room;
@@ -23,19 +23,30 @@ class RoomBot implements Contracts\RoomBot
 
     public function handleCommand(): void
     {
+
         $this->commands->register(function (BotMan $botMan, Command $command) {
+            // Если команды имеют флаг "Только для менеджера", то обычный
+            // пользователь не может их видеть и выполнять
             return !$command->forManager()
                 || (
                     $command->forManager()
-                    && $command->getUserHash() === $this->room->user_id
+                    && $this->room->isOwner($command->getUser())
                 );
-        }, function (Command $command, ...$args) {
-            $command->handle($this->room, ...$args);
+        }, function (Command $command, StringInput $args) {
+            // Добавляем в аргументы объект комнаты
+            $args->setArgument('room', $this->room);
+            $command->handle($args);
         });
 
+        // Добавляем команду для отправки текущей позиции пользователя
         $this->botMan->receivesLocation(function($bot, Location $location) {
             $command = new StoreLocation($this->botMan);
-            $command->handle($this->room, $location);
+
+            $args = $command->args();
+            $args->setArgument('room', $this->room);
+            $args->setArgument('location', $location);
+
+            $command->handle($args);
         });
 
         $this->botMan->listen();

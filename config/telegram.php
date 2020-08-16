@@ -23,6 +23,7 @@ return [
         'commands' => [
             App\Telegram\Room\UpdateTitle::class,
             App\Telegram\Room\UpdateDescription::class,
+            App\Telegram\Room\UpdateRoomLocation::class,
             App\Telegram\Room\SetPassword::class,
             App\Telegram\Room\RemovePassword::class,
             App\Telegram\Room\AuthUser::class,

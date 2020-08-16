@@ -3,17 +3,16 @@
 namespace App\Telegram\Room;
 
 use App\Infrastructure\Telegram\Command;
+use App\Infrastructure\Telegram\StringInput;
 use App\Models\Room;
-use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Support\Facades\Cache;
-use MStaack\LaravelPostgis\Geometries\Point;
 use BotMan\BotMan\Messages\Attachments\Location;
 
 class StoreLocation extends Command
 {
     public function signature(): string
     {
-        return '';
+        return '/location';
     }
 
     public function description(): string
@@ -21,24 +20,20 @@ class StoreLocation extends Command
         return 'Store user location';
     }
 
-    public function handle(Room $room, Location $location): void
+    public function handle(StringInput $input): void
     {
+        /** @var Room $room */
+        $room = $input->getArgument('room');
+        /** @var Location $location */
+        $location = $input->getArgument('location');
+
         $this->checkAuthentication($room);
 
-        $hash = $this->getUserHash();
+        $hash = $this->getUser()->getHash();
 
         $lock = Cache::lock('points:' . $hash, 30);
         if ($lock->get()) {
-            $room->points()->updateOrCreate([
-                'owner_hash' => $this->getUserHash(),
-            ], [
-                'location' => new Point(
-                    $location->getLatitude(),
-                    $location->getLongitude()
-                ),
-                'username' => $room->is_anonymous ? null : $this->bot->getUser()->getUsername()
-            ]);
-
+            Room\Point::storeForRoom($room, $this->getUser(), $location);
             $this->bot->reply('Your location is stored.');
         } else {
             $this->bot->reply('Slow down...');

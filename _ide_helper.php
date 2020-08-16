@@ -2842,8 +2842,6 @@
             /**
      * 
      *
-     * @method static \Illuminate\Contracts\Cache\Lock lock(string $name, int $seconds = 0, mixed $owner = null)
-     * @method static \Illuminate\Contracts\Cache\Lock restoreLock(string $name, string $owner)
      * @see \Illuminate\Cache\CacheManager
      * @see \Illuminate\Cache\Repository
      */ 
@@ -3401,6 +3399,33 @@
                         return $instance->macroCall($method, $parameters);
         }
                     /**
+         * Get a lock instance.
+         *
+         * @param string $name
+         * @param int $seconds
+         * @param string|null $owner
+         * @return \Illuminate\Contracts\Cache\Lock 
+         * @static 
+         */ 
+        public static function lock($name, $seconds = 0, $owner = null)
+        {
+                        /** @var \Illuminate\Cache\RedisStore $instance */
+                        return $instance->lock($name, $seconds, $owner);
+        }
+                    /**
+         * Restore a lock instance using the owner identifier.
+         *
+         * @param string $name
+         * @param string $owner
+         * @return \Illuminate\Contracts\Cache\Lock 
+         * @static 
+         */ 
+        public static function restoreLock($name, $owner)
+        {
+                        /** @var \Illuminate\Cache\RedisStore $instance */
+                        return $instance->restoreLock($name, $owner);
+        }
+                    /**
          * Remove all items from the cache.
          *
          * @return bool 
@@ -3408,30 +3433,42 @@
          */ 
         public static function flush()
         {
-                        /** @var \Illuminate\Cache\FileStore $instance */
+                        /** @var \Illuminate\Cache\RedisStore $instance */
                         return $instance->flush();
         }
                     /**
-         * Get the Filesystem instance.
+         * Get the Redis connection instance.
          *
-         * @return \Illuminate\Filesystem\Filesystem 
+         * @return \Illuminate\Redis\Connections\Connection 
          * @static 
          */ 
-        public static function getFilesystem()
+        public static function connection()
         {
-                        /** @var \Illuminate\Cache\FileStore $instance */
-                        return $instance->getFilesystem();
+                        /** @var \Illuminate\Cache\RedisStore $instance */
+                        return $instance->connection();
         }
                     /**
-         * Get the working directory of the cache.
+         * Set the connection name to be used.
          *
-         * @return string 
+         * @param string $connection
+         * @return void 
          * @static 
          */ 
-        public static function getDirectory()
+        public static function setConnection($connection)
         {
-                        /** @var \Illuminate\Cache\FileStore $instance */
-                        return $instance->getDirectory();
+                        /** @var \Illuminate\Cache\RedisStore $instance */
+                        $instance->setConnection($connection);
+        }
+                    /**
+         * Get the Redis database instance.
+         *
+         * @return \Illuminate\Contracts\Redis\Factory 
+         * @static 
+         */ 
+        public static function getRedis()
+        {
+                        /** @var \Illuminate\Cache\RedisStore $instance */
+                        return $instance->getRedis();
         }
                     /**
          * Get the cache key prefix.
@@ -3441,8 +3478,20 @@
          */ 
         public static function getPrefix()
         {
-                        /** @var \Illuminate\Cache\FileStore $instance */
+                        /** @var \Illuminate\Cache\RedisStore $instance */
                         return $instance->getPrefix();
+        }
+                    /**
+         * Set the cache key prefix.
+         *
+         * @param string $prefix
+         * @return void 
+         * @static 
+         */ 
+        public static function setPrefix($prefix)
+        {
+                        /** @var \Illuminate\Cache\RedisStore $instance */
+                        $instance->setPrefix($prefix);
         }
          
     }
@@ -14867,125 +14916,6 @@
      
 }
 
-    namespace Telegram\Bot\Laravel\Facades { 
-            /**
-     * Class Telegram.
-     *
-     */ 
-        class Telegram {
-                    /**
-         * Set the IoC Container.
-         *
-         * @param $container Container instance
-         * @return \Telegram\Bot\BotsManager 
-         * @static 
-         */ 
-        public static function setContainer($container)
-        {
-                        /** @var \Telegram\Bot\BotsManager $instance */
-                        return $instance->setContainer($container);
-        }
-                    /**
-         * Get the configuration for a bot.
-         *
-         * @param string|null $name
-         * @throws \InvalidArgumentException
-         * @return array 
-         * @static 
-         */ 
-        public static function getBotConfig($name = null)
-        {
-                        /** @var \Telegram\Bot\BotsManager $instance */
-                        return $instance->getBotConfig($name);
-        }
-                    /**
-         * Get a bot instance.
-         *
-         * @param string $name
-         * @return \Telegram\Bot\Api 
-         * @static 
-         */ 
-        public static function bot($name = null)
-        {
-                        /** @var \Telegram\Bot\BotsManager $instance */
-                        return $instance->bot($name);
-        }
-                    /**
-         * Reconnect to the given bot.
-         *
-         * @param string $name
-         * @return \Telegram\Bot\Api 
-         * @static 
-         */ 
-        public static function reconnect($name = null)
-        {
-                        /** @var \Telegram\Bot\BotsManager $instance */
-                        return $instance->reconnect($name);
-        }
-                    /**
-         * Disconnect from the given bot.
-         *
-         * @param string $name
-         * @return void 
-         * @static 
-         */ 
-        public static function disconnect($name = null)
-        {
-                        /** @var \Telegram\Bot\BotsManager $instance */
-                        $instance->disconnect($name);
-        }
-                    /**
-         * Get the specified configuration value for Telegram.
-         *
-         * @param string $key
-         * @param mixed $default
-         * @return mixed 
-         * @static 
-         */ 
-        public static function getConfig($key, $default = null)
-        {
-                        /** @var \Telegram\Bot\BotsManager $instance */
-                        return $instance->getConfig($key, $default);
-        }
-                    /**
-         * Get the default bot name.
-         *
-         * @return string 
-         * @static 
-         */ 
-        public static function getDefaultBot()
-        {
-                        /** @var \Telegram\Bot\BotsManager $instance */
-                        return $instance->getDefaultBot();
-        }
-                    /**
-         * Set the default bot name.
-         *
-         * @param string $name
-         * @return \Telegram\Bot\BotsManager 
-         * @static 
-         */ 
-        public static function setDefaultBot($name)
-        {
-                        /** @var \Telegram\Bot\BotsManager $instance */
-                        return $instance->setDefaultBot($name);
-        }
-                    /**
-         * Return all of the created bots.
-         *
-         * @return \Telegram\Bot\Api[] 
-         * @static 
-         */ 
-        public static function getBots()
-        {
-                        /** @var \Telegram\Bot\BotsManager $instance */
-                        return $instance->getBots();
-        }
-         
-    }
-     
-}
-
 
 namespace  { 
             class App extends \Illuminate\Support\Facades\App {}
@@ -17962,7 +17892,6 @@ namespace  {
             class View extends \Illuminate\Support\Facades\View {}
             class BotMan extends \BotMan\BotMan\Facades\BotMan {}
             class Flare extends \Facade\Ignition\Facades\Flare {}
-            class Telegram extends \Telegram\Bot\Laravel\Facades\Telegram {}
      
 }
 

@@ -5,18 +5,18 @@ namespace App\Telegram\Room;
 use App\Infrastructure\Telegram\ManagerCommand;
 use App\Infrastructure\Telegram\StringInput;
 use App\Models\Room;
-use Hash;
+use MStaack\LaravelPostgis\Geometries\Point;
 
-class SetPassword extends ManagerCommand
+class UpdateRoomLocation extends ManagerCommand
 {
     public function signature(): string
     {
-        return '/setpwd {password : Room password}';
+        return '/setlocation {lat : Latitude} {lon : Longitude}';
     }
 
     public function description(): string
     {
-        return 'Set room password';
+        return 'Update room location';
     }
 
     public function handle(StringInput $input): void
@@ -25,11 +25,13 @@ class SetPassword extends ManagerCommand
         $room = $input->getArgument('room');
 
         $room->update([
-            'password' => Hash::make(
-                $input->getArgument('password')
-            )
+            'location' => new Point(
+                $input->getArgument('lat'),
+                $input->getArgument('lon')
+            ),
         ]);
 
-        $this->bot->reply('Password for room set.');
+        $this->bot->reply('Room location updated.');
     }
 }
+

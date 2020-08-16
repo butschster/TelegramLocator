@@ -5,10 +5,12 @@ namespace App\Infrastructure\Telegram;
 use App\Infrastructure\Telegram\Contracts\Command;
 use App\Infrastructure\Telegram\Exceptions\TelegramWebhookException;
 use App\Models\Room;
+use BotMan\BotMan\BotMan;
 use BotMan\BotMan\BotManFactory;
 use GuzzleHttp\ClientInterface;
 use BotMan\BotMan\Cache\LaravelCache;
 use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\GuzzleException;
 
 class BotManager implements Contracts\BotManager
 {
@@ -32,13 +34,14 @@ class BotManager implements Contracts\BotManager
         $this->roomCommands = $roomCommands;
     }
 
-    public function forManager(): Contracts\ManagerBot
+    /**
+     * Создание бота для менеджера
+     *
+     * @return Contracts\Bot
+     */
+    public function forManager(): Contracts\Bot
     {
-        $botMan = BotManFactory::create([
-            'telegram' => [
-                'token' => $this->managerToken
-            ]
-        ], new LaravelCache());
+        $botMan = $this->createBotManInstance($this->managerToken);
 
         return new ManagerBot(
             $botMan,
@@ -46,13 +49,15 @@ class BotManager implements Contracts\BotManager
         );
     }
 
-    public function forRoom(Room $room): Contracts\RoomBot
+    /**
+     * Создание бота для комнаты
+     *
+     * @param Room $room
+     * @return Contracts\Bot
+     */
+    public function forRoom(Room $room): Contracts\Bot
     {
-        $botMan = BotManFactory::create([
-            'telegram' => [
-                'token' => $room->telegram_token
-            ]
-        ], new LaravelCache());
+        $botMan = $this->createBotManInstance($room->telegram_token);
 
         return new RoomBot(
             $botMan,
@@ -61,6 +66,11 @@ class BotManager implements Contracts\BotManager
         );
     }
 
+    /**
+     * Регистрация вебхука для комнаты
+     * @param Room $room
+     * @throws GuzzleException
+     */
     public function registerWebhookForRoom(Room $room): void
     {
         $this->registerWebhook(
@@ -69,6 +79,10 @@ class BotManager implements Contracts\BotManager
         );
     }
 
+    /**
+     * Регистрация вебхука для менеджера
+     * @throws GuzzleException
+     */
     public function registerWebhookForManager(): void
     {
         $this->registerWebhook(
@@ -77,7 +91,13 @@ class BotManager implements Contracts\BotManager
         );
     }
 
-    protected function registerWebhook(string $token, string $url)
+    /**
+     * Регистрация вебхука для переданного токена и URL
+     * @param string $token
+     * @param string $url
+     * @throws GuzzleException
+     */
+    protected function registerWebhook(string $token, string $url): void
     {
         $url = 'https://api.telegram.org/bot' . $token . '/setWebhook?url=' . $url;
 
@@ -86,5 +106,22 @@ class BotManager implements Contracts\BotManager
         } catch (ClientException $e) {
             throw new TelegramWebhookException($e->getMessage());
         }
+    }
+
+    /**
+     *
+     * @param string $token
+     * @return BotMan
+     */
+    protected function createBotManInstance(string $token): BotMan
+    {
+        return BotManFactory::create([
+            'telegram' => [
+                'token' => $token,
+                'default_additional_parameters' => [
+                    'parse_mode' => 'markdown'
+                ]
+            ]
+        ], new LaravelCache());
     }
 }

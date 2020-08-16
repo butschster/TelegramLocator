@@ -10,17 +10,17 @@ interface BotManager
     /**
      * Получение телеграм бота для менеджеров
      *
-     * @return ManagerBot
+     * @return Bot
      */
-    public function forManager(): ManagerBot;
+    public function forManager(): Bot;
 
     /**
      * Получение телеграм бота для комнаты
      *
      * @param Room $room
-     * @return RoomBot
+     * @return Bot
      */
-    public function forRoom(Room $room): RoomBot;
+    public function forRoom(Room $room): Bot;
 
     /**
      * Регистрация телеграм бота для комнаты

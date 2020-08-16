@@ -3,6 +3,7 @@
 namespace App\Telegram\Room;
 
 use App\Infrastructure\Telegram\Command;
+use App\Infrastructure\Telegram\StringInput;
 use App\Models\Room;
 use Hash;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -11,7 +12,7 @@ class AuthUser extends Command
 {
     public function signature(): string
     {
-        return '/room_auth {password}';
+        return '/auth {password : Room password}';
     }
 
     public function description(): string
@@ -19,21 +20,23 @@ class AuthUser extends Command
         return 'Authenticate user by password';
     }
 
-    public function handle(Room $room, string $password): void
+    public function handle(StringInput $input): void
     {
-        $hash = $this->getUserHash();
+        /** @var Room $room */
+        $room = $input->getArgument('room');
+        $password = $input->getArgument('password');
+        $user = $this->getUser();
 
-        if ($room->hasAccess($hash)) {
+        if ($room->hasAccess($user)) {
             $this->bot->reply('You don\'t need auth.');
             return;
         }
 
         if (!Hash::check($password, $room->password)) {
             throw new AuthorizationException('Incorrect password.');
-            return;
         }
 
-        $room->addUser($hash);
+        $room->addUser($user);
         $this->bot->reply('Authenticated!');
     }
 }

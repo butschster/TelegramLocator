@@ -2,10 +2,11 @@
 
 namespace App\Telegram\Manager;
 
-use App\Infrastructure\Telegram\ManagerCommand;
+use App\Infrastructure\Telegram\Command;
+use App\Infrastructure\Telegram\StringInput;
 use App\Models\User;
 
-class RegisterUser extends ManagerCommand
+class RegisterUser extends Command
 {
     public function signature(): string
     {
@@ -17,9 +18,9 @@ class RegisterUser extends ManagerCommand
         return 'Register new user';
     }
 
-    public function handle(): void
+    public function handle(StringInput $input): void
     {
-        $user = User::find($this->bot->getUser()->getId());
+        $user = User::findByTelegramUser($this->getUser());
 
         if ($user) {
             $this->bot->reply('Your account has been already registered.');
@@ -27,8 +28,8 @@ class RegisterUser extends ManagerCommand
         }
 
         $user = User::create([
-            'id' => $this->getUserHash(),
-            'username' => $this->bot->getUser()->getUsername()
+            'id' => $this->getUser()->getHash(),
+            'username' => $this->getUser()->getUsername()
         ]);
 
         $this->bot->reply(sprintf('Hello %s! Welcome to our service!', $user->username));

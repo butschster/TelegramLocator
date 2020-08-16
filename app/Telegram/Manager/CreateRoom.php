@@ -5,6 +5,7 @@ namespace App\Telegram\Manager;
 use App\Infrastructure\Telegram\Contracts\BotManager;
 use App\Infrastructure\Telegram\Exceptions\TelegramWebhookException;
 use App\Infrastructure\Telegram\ManagerCommand;
+use App\Infrastructure\Telegram\StringInput;
 use App\Models\Room;
 use Exception;
 
@@ -12,7 +13,7 @@ class CreateRoom extends ManagerCommand
 {
     public function signature(): string
     {
-        return '/create_room {token}';
+        return '/mkroom {token : Telegarm bot API token}';
     }
 
     public function description(): string
@@ -20,9 +21,11 @@ class CreateRoom extends ManagerCommand
         return 'Create a new room';
     }
 
-    public function handle(string $token)
+    public function handle(StringInput $input): void
     {
+        $token = $input->getArgument('token');
         $room = Room::where('telegram_token', $token)->first();
+
         if ($room) {
             $this->bot->reply('Room with given token exists.');
             return;

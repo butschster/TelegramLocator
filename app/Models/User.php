@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Infrastructure\Telegram\User as TelegramUser;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Notifications\Notifiable;
@@ -9,6 +10,16 @@ use Illuminate\Notifications\Notifiable;
 class User extends Model
 {
     use Notifiable;
+
+    /**
+     * Получение объекта пользователя через объект пользователя телеграма
+     * @param TelegramUser $user
+     * @return User|null
+     */
+    public static function findByTelegramUser(TelegramUser $user): ?self
+    {
+        return static::find($user->getHash());
+    }
 
     /**
      * The "type" of the primary key ID.

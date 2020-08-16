@@ -2,88 +2,62 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="94d615e8-3181-4b4e-9e3a-3702ed87962a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/ff211642-0ae8-41be-a8b0-11a46b39d345.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/ff211642-0ae8-41be-a8b0-11a46b39d345/storage_v2/_src_/database/locations_bot.ZiX6lQ.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/ff211642-0ae8-41be-a8b0-11a46b39d345/storage_v2/_src_/database/locations_bot.ZiX6lQ/schema/information_schema.FNRwLQ.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/ff211642-0ae8-41be-a8b0-11a46b39d345/storage_v2/_src_/database/locations_bot.ZiX6lQ/schema/pg_catalog.0S1ZNQ.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/ff211642-0ae8-41be-a8b0-11a46b39d345/storage_v2/_src_/database/locations_bot.ZiX6lQ/schema/public.abK9xQ.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/ff211642-0ae8-41be-a8b0-11a46b39d345/storage_v2/_src_/database/locations_bot.ZiX6lQ/schema/public.abK9xQ.zip" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.phpstorm.meta.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/_ide_helper.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/_ide_helper_models.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Console/Commands/Telegram/RegisterManagerCommand.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Console/Commands/Telegram/RegisterRoomCommand.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Infrastructure/Telegram/BotManager.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Infrastructure/Telegram/Command.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Infrastructure/Telegram/CommandsManager.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Infrastructure/Telegram/Contracts/BotManager.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Infrastructure/Telegram/Contracts/Command.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Infrastructure/Telegram/Contracts/ManagerBot.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Infrastructure/Telegram/Contracts/RoomBot.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Infrastructure/Telegram/Exceptions/TelegramWebhookException.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Infrastructure/Telegram/ManagerBot.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Infrastructure/Telegram/ManagerCommand.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Infrastructure/Telegram/RoomBot.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Infrastructure/Telegram/TelegramServiceProvider.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Models/Concerns/UsesUuid.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Models/Concerns/WithLocation.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Models/Room.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Models/Room/Point.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Providers/SchemaServiceProvider.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Telegram/Manager/CreateRoom.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Telegram/Manager/DeleteRoom.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Telegram/Manager/RegisterUser.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Telegram/Room/AuthUser.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Telegram/Room/GetInformation.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Telegram/Room/MakeAnonymous.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Telegram/Room/RemovePassword.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Telegram/Room/SetPassword.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Telegram/Room/StoreLocation.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Telegram/Room/UpdateDescription.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Telegram/Room/UpdateTitle.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/telegram.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2020_08_13_000000_init_postgis.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2020_08_13_145749_create_rooms_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2020_08_13_150657_create_room_points_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2020_08_13_151358_create_room_legend_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2020_08_13_151627_create_room_legend_points_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2020_08_13_201201_create_room_users_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/TelegramController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Infrastructure/Telegram/StringInput.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Infrastructure/Telegram/User.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Telegram/Room/UpdateRoomLocation.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/deploy.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env.example" beforeDir="false" afterPath="$PROJECT_DIR$/.env.example" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/TelegramLocator.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/TelegramLocator.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/ff211642-0ae8-41be-a8b0-11a46b39d345.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/ff211642-0ae8-41be-a8b0-11a46b39d345.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.phpstorm.meta.php" beforeDir="false" afterPath="$PROJECT_DIR$/.phpstorm.meta.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/VerifyCsrfToken.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/VerifyCsrfToken.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_ide_helper.php" beforeDir="false" afterPath="$PROJECT_DIR$/_ide_helper.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_ide_helper_models.php" beforeDir="false" afterPath="$PROJECT_DIR$/_ide_helper_models.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Console/Commands/Telegram/RegisterRoomCommand.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Console/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Console/Kernel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Infrastructure/Telegram/BotManager.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Infrastructure/Telegram/BotManager.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Infrastructure/Telegram/Command.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Infrastructure/Telegram/Command.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Infrastructure/Telegram/CommandsManager.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Infrastructure/Telegram/CommandsManager.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Infrastructure/Telegram/Contracts/BotManager.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Infrastructure/Telegram/Contracts/BotManager.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Infrastructure/Telegram/Contracts/Command.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Infrastructure/Telegram/Contracts/Command.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Infrastructure/Telegram/Contracts/ManagerBot.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Infrastructure/Telegram/Contracts/Bot.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Infrastructure/Telegram/Contracts/RoomBot.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Infrastructure/Telegram/ManagerBot.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Infrastructure/Telegram/ManagerBot.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Infrastructure/Telegram/RoomBot.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Infrastructure/Telegram/RoomBot.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Concerns/WithLocation.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Concerns/WithLocation.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Room.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Room.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Room/Point.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Room/Point.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Telegram/Manager/CreateRoom.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Telegram/Manager/CreateRoom.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Telegram/Manager/DeleteRoom.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Telegram/Manager/DeleteRoom.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Telegram/Manager/RegisterUser.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Telegram/Manager/RegisterUser.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Telegram/Room/AuthUser.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Telegram/Room/AuthUser.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Telegram/Room/GetInformation.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Telegram/Room/GetInformation.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Telegram/Room/MakeAnonymous.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Telegram/Room/MakeAnonymous.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Telegram/Room/RemovePassword.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Telegram/Room/RemovePassword.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Telegram/Room/SetPassword.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Telegram/Room/SetPassword.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Telegram/Room/StoreLocation.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Telegram/Room/StoreLocation.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Telegram/Room/UpdateDescription.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Telegram/Room/UpdateDescription.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Telegram/Room/UpdateTitle.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Telegram/Room/UpdateTitle.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2014_10_12_100000_create_password_resets_table.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/welcome.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/welcome.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/database.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/database.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/telegram.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/telegram.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_08_13_150657_create_room_points_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_08_13_150657_create_room_points_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/channels.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/channels.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/console.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/console.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/channels.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/console.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/app/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/storage/app/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/app/public/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/storage/app/public/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/framework/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/framework/cache/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/cache/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/framework/cache/data/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/cache/data/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/framework/sessions/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/sessions/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/framework/testing/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/testing/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/framework/views/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/views/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/logs/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/storage/logs/.gitignore" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution />
   </component>
@@ -224,6 +198,24 @@
       <path value="$PROJECT_DIR$/vendor/geo-io/interface" />
       <path value="$PROJECT_DIR$/vendor/geo-io/wkb-parser" />
       <path value="$PROJECT_DIR$/vendor/mstaack/laravel-postgis" />
+      <path value="$PROJECT_DIR$/vendor/jenssegers/mongodb" />
+      <path value="$PROJECT_DIR$/vendor/mongodb/mongodb" />
+      <path value="$PROJECT_DIR$/vendor/sentry/sentry" />
+      <path value="$PROJECT_DIR$/vendor/sentry/sentry-laravel" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-uuid" />
+      <path value="$PROJECT_DIR$/vendor/symfony/options-resolver" />
+      <path value="$PROJECT_DIR$/vendor/php-http/promise" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-client" />
+      <path value="$PROJECT_DIR$/vendor/php-http/message-factory" />
+      <path value="$PROJECT_DIR$/vendor/php-http/client-common" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-factory" />
+      <path value="$PROJECT_DIR$/vendor/php-http/discovery" />
+      <path value="$PROJECT_DIR$/vendor/php-http/guzzle6-adapter" />
+      <path value="$PROJECT_DIR$/vendor/php-http/message" />
+      <path value="$PROJECT_DIR$/vendor/php-http/httplug" />
+      <path value="$PROJECT_DIR$/vendor/jean85/pretty-package-versions" />
+      <path value="$PROJECT_DIR$/vendor/http-interop/http-factory-guzzle" />
+      <path value="$PROJECT_DIR$/vendor/clue/stream-filter" />
     </include_path>
   </component>
   <component name="ProjectId" id="1g34CabGxmzfMovU1v3F8uGebwC" />
@@ -235,7 +227,7 @@
     <property name="DatabaseDriversLRU" value="postgresql" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/Telegram/Room" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -252,12 +244,18 @@
       <recent name="$PROJECT_DIR$/app/Models" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/app/Telegram/Room" />
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/app/Infrastructure/Telegram" />
+      <recent name="$PROJECT_DIR$/app/Telegram/Room" />
       <recent name="$PROJECT_DIR$/app/Models/Concerns" />
       <recent name="$PROJECT_DIR$/app/Providers" />
-      <recent name="$PROJECT_DIR$/app/Console/Commands/Telegram" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="phpunit.xml" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
+      <TestRunner scope="XML" />
+      <method v="2" />
+    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -268,6 +266,9 @@
       <option name="presentableId" value="Default" />
       <updated>1597329814605</updated>
       <workItem from="1597329815572" duration="24167000" />
+      <workItem from="1597385200478" duration="18906000" />
+      <workItem from="1597411582739" duration="3535000" />
+      <workItem from="1597564401811" duration="4570000" />
     </task>
     <servers />
   </component>
@@ -283,30 +284,34 @@
       <screen x="1920" y="0" width="2560" height="1440" />
     </state>
     <state x="2746" y="534" width="895" height="413" key="#com.intellij.fileTypes.FileTypeChooser/1920.0.2560.1440/0.27.1920.1053@1920.0.2560.1440" timestamp="1597343586401" />
-    <state x="2984" y="412" width="421" height="712" key="#com.intellij.ide.util.MemberChooser" timestamp="1597351789936">
+    <state x="2984" y="412" width="431" height="719" key="#com.intellij.ide.util.MemberChooser" timestamp="1597565559281">
       <screen x="1920" y="0" width="2560" height="1440" />
     </state>
-    <state x="2984" y="412" width="421" height="712" key="#com.intellij.ide.util.MemberChooser/1920.0.2560.1440/0.27.1920.1053@1920.0.2560.1440" timestamp="1597351789936" />
-    <state x="2867" y="376" width="646" height="729" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1597350746287">
+    <state x="2984" y="412" width="431" height="719" key="#com.intellij.ide.util.MemberChooser/1920.0.2560.1440/0.27.1920.1053@1920.0.2560.1440" timestamp="1597565559281" />
+    <state x="2867" y="376" width="646" height="729" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1597566935745">
       <screen x="1920" y="0" width="2560" height="1440" />
     </state>
-    <state x="2867" y="376" width="646" height="729" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/1920.0.2560.1440/0.27.1920.1053@1920.0.2560.1440" timestamp="1597350746287" />
-    <state x="2933" y="491" width="524" height="491" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1597352488013">
+    <state x="2867" y="376" width="646" height="729" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/1920.0.2560.1440/0.27.1920.1053@1920.0.2560.1440" timestamp="1597566935745" />
+    <state x="2933" y="491" width="524" height="491" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1597567593530">
       <screen x="1920" y="0" width="2560" height="1440" />
     </state>
-    <state x="2933" y="491" width="524" height="491" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/1920.0.2560.1440/0.27.1920.1053@1920.0.2560.1440" timestamp="1597352488013" />
-    <state x="2983" y="491" width="416" height="505" key="FileChooserDialogImpl" timestamp="1597340822838">
+    <state x="2933" y="491" width="524" height="491" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/1920.0.2560.1440/0.27.1920.1053@1920.0.2560.1440" timestamp="1597567593530" />
+    <state x="146" y="88" width="1707" height="955" key="CommitChangelistDialog2" timestamp="1597389921129">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state x="146" y="88" width="1707" height="955" key="CommitChangelistDialog2/1920.0.2560.1440/0.27.1920.1053@1920.0.2560.1440" timestamp="1597389921129" />
+    <state x="2983" y="491" width="416" height="512" key="FileChooserDialogImpl" timestamp="1597568895656">
       <screen x="1920" y="0" width="2560" height="1440" />
     </state>
-    <state x="2983" y="491" width="416" height="505" key="FileChooserDialogImpl/1920.0.2560.1440/0.27.1920.1053@1920.0.2560.1440" timestamp="1597340822838" />
-    <state x="2844" y="448" width="926" height="578" key="NewPhpClassDialog" timestamp="1597354856069">
+    <state x="2983" y="491" width="416" height="512" key="FileChooserDialogImpl/1920.0.2560.1440/0.27.1920.1053@1920.0.2560.1440" timestamp="1597568895656" />
+    <state x="2844" y="448" width="926" height="578" key="NewPhpClassDialog" timestamp="1597567867965">
       <screen x="1920" y="0" width="2560" height="1440" />
     </state>
-    <state x="2844" y="448" width="926" height="578" key="NewPhpClassDialog/1920.0.2560.1440/0.27.1920.1053@1920.0.2560.1440" timestamp="1597354856069" />
-    <state x="2681" y="368" width="1037" height="737" key="SettingsEditor" timestamp="1597337618057">
+    <state x="2844" y="448" width="926" height="578" key="NewPhpClassDialog/1920.0.2560.1440/0.27.1920.1053@1920.0.2560.1440" timestamp="1597567867965" />
+    <state x="2681" y="368" width="1037" height="737" key="SettingsEditor" timestamp="1597565578189">
       <screen x="1920" y="0" width="2560" height="1440" />
     </state>
-    <state x="2681" y="368" width="1037" height="737" key="SettingsEditor/1920.0.2560.1440/0.27.1920.1053@1920.0.2560.1440" timestamp="1597337618057" />
+    <state x="2681" y="368" width="1037" height="737" key="SettingsEditor/1920.0.2560.1440/0.27.1920.1053@1920.0.2560.1440" timestamp="1597565578189" />
     <state x="2944" y="516" width="501" height="437" key="com.intellij.database.psi.DbRenamePsiElementProcessor.DbRenameDialog" timestamp="1597351675534">
       <screen x="1920" y="0" width="2560" height="1440" />
     </state>
@@ -335,9 +340,9 @@
       <screen x="1920" y="0" width="2560" height="1440" />
     </state>
     <state x="2863" y="349" width="672" height="678" key="search.everywhere.popup/1920.0.2560.1440/0.27.1920.1053@1920.0.2560.1440" timestamp="1597332969262" />
-    <state x="2925" y="646" width="540" height="181" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1597348886946">
+    <state x="2925" y="646" width="540" height="181" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1597396547584">
       <screen x="1920" y="0" width="2560" height="1440" />
     </state>
-    <state x="2925" y="646" width="540" height="181" key="vcs.readOnlyHandler.ReadOnlyStatusDialog/1920.0.2560.1440/0.27.1920.1053@1920.0.2560.1440" timestamp="1597348886946" />
+    <state x="2925" y="646" width="540" height="181" key="vcs.readOnlyHandler.ReadOnlyStatusDialog/1920.0.2560.1440/0.27.1920.1053@1920.0.2560.1440" timestamp="1597396547584" />
   </component>
 </project>

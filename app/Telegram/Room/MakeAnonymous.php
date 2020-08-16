@@ -3,6 +3,7 @@
 namespace App\Telegram\Room;
 
 use App\Infrastructure\Telegram\ManagerCommand;
+use App\Infrastructure\Telegram\StringInput;
 use App\Models\Room;
 
 class MakeAnonymous extends ManagerCommand
@@ -10,7 +11,7 @@ class MakeAnonymous extends ManagerCommand
 
     public function signature(): string
     {
-        return '/room_make_anonymous';
+        return '/makeanonymous';
     }
 
     public function description(): string
@@ -18,8 +19,11 @@ class MakeAnonymous extends ManagerCommand
         return 'Make room anonymous';
     }
 
-    public function handle(Room $room)
+    public function handle(StringInput $input): void
     {
+        /** @var Room $room */
+        $room = $input->getArgument('room');
+
         $room->update([
             'is_anonymous' => true
         ]);

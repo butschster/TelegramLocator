@@ -35,7 +35,7 @@ trait WithLocation
      * @param Builder $query
      * @param Point $point
      */
-    public function scopeOrderByNearest(Builder $query, Point $point)
+    public function scopeOrderByNearest(Builder $query, Point $point): void
     {
         $query->orderByRaw(
             "ST_Distance(location, ST_Point(?, ?))",
@@ -44,31 +44,31 @@ trait WithLocation
     }
 
     /**
+     * Получение точек в заданном радиусе
      * @param Builder $query
      * @param Point $location
-     * @param float $units in kilometers
+     * @param float $radius in kilometers
      */
-    public function scopeInRadius(Builder $query, Point $location, float $units): void
+    public function scopeInRadius(Builder $query, Point $location, float $radius): void
     {
         $longitude = $location->getLng();
         $latitude = $location->getLat();
 
         // Convert into meters
-        $units *= 1000;
+        $radius *= 1000;
 
-        $query->where(function (Builder $query) use($longitude, $latitude, $units) {
+        $query->where(function (Builder $query) use($longitude, $latitude, $radius) {
             $query
                 ->whereNotNull("{$this->getTable()}.location")
-                ->whereRaw("ST_Distance({$this->getTable()}.location, ST_Point({$longitude},{$latitude})) <= {$units}");
+                ->whereRaw("ST_Distance({$this->getTable()}.location, ST_Point({$longitude},{$latitude})) <= {$radius}");
         });
     }
 
     /**
-     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param Builder $query
      * @param Point $location
-     * @return Builder
      */
-    public function scopeWithDistance(Builder $query, $location)
+    public function scopeWithDistance(Builder $query, $location): void
     {
         $classQuery = $query->getQuery();
         if ($classQuery && !$classQuery->columns) {
@@ -88,7 +88,7 @@ trait WithLocation
             $q = "0";
         }
 
-        return $query->selectSub($q, 'distance');
+        $query->selectSub($q, 'distance');
     }
 
     /**
@@ -155,15 +155,6 @@ trait WithLocation
         }
 
         return $this->location->getLng();
-    }
-
-    /**
-     * @param Location $location
-     */
-    public function setLocation(Location $location): void
-    {
-        $this->location = $location->getPoint();
-        $this->address = $location->getAddress();
     }
 
     /**

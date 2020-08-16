@@ -13,7 +13,7 @@ class CreateRoomPointsTable extends Migration
      */
     public function up()
     {
-        Schema::create('room_points', function (Blueprint $table) {
+        Schema::connection('mongodb')->create('room_points', function (Blueprint $table) {
             $table->id();
             $table->uuid('room_uuid');
             $table->string('owner_hash');

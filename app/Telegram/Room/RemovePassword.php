@@ -3,13 +3,14 @@
 namespace App\Telegram\Room;
 
 use App\Infrastructure\Telegram\ManagerCommand;
+use App\Infrastructure\Telegram\StringInput;
 use App\Models\Room;
 
 class RemovePassword extends ManagerCommand
 {
     public function signature(): string
     {
-        return '/room_remove_password';
+        return '/rmpwd';
     }
 
     public function description(): string
@@ -17,8 +18,11 @@ class RemovePassword extends ManagerCommand
         return 'Remove room password';
     }
 
-    public function handle(Room $room)
+    public function handle(StringInput $input): void
     {
+        /** @var Room $room */
+        $room = $input->getArgument('room');
+
         $room->update([
             'password' => null
         ]);

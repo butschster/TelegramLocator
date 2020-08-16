@@ -4,7 +4,7 @@ namespace App\Infrastructure\Telegram;
 
 use BotMan\BotMan\BotMan;
 
-class ManagerBot implements Contracts\ManagerBot
+class ManagerBot implements Contracts\Bot
 {
     private BotMan $botMan;
     private CommandsManager $commands;
@@ -18,7 +18,6 @@ class ManagerBot implements Contracts\ManagerBot
     public function handleCommand(): void
     {
         $this->commands->register();
-
         $this->botMan->listen();
     }
 }
