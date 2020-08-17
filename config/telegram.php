@@ -18,6 +18,7 @@ return [
             App\Telegram\Manager\RegisterUser::class,
             App\Telegram\Manager\CreateRoom::class,
             App\Telegram\Manager\DeleteRoom::class,
+            App\Telegram\Manager\SearchNearestRoms::class,
         ]
     ],
     'room' => [
@@ -31,6 +32,7 @@ return [
             App\Telegram\Room\DownloadGeoJson::class,
             App\Telegram\Room\SetPassword::class,
             App\Telegram\Room\RemovePassword::class,
+            App\Telegram\Room\SetPointsLifeTime::class,
             App\Telegram\Room\AuthUser::class,
             App\Telegram\Room\GetInformation::class,
         ]

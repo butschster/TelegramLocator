@@ -17,10 +17,12 @@ class CommandsManager
      * @var Collection|\Tightenco\Collect\Support\Collection|Command[]
      */
     private Collection $commands;
+    private ApiContract $api;
 
     public function __construct(BotMan $botMan, ApiContract $api, array $commands)
     {
         $this->botMan = $botMan;
+        $this->api = $api;
         $this->commands = collect($commands)->map(function ($command) use($api) {
             return new $command($this->botMan, $api);
         });

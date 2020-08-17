@@ -5,6 +5,7 @@ namespace App\Telegram\Room;
 use App\Infrastructure\Telegram\Command;
 use App\Infrastructure\Telegram\StringInput;
 use App\Models\Room;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Gate;
 
@@ -49,6 +50,9 @@ class GetInformation extends Command
             'Title' => $room->title,
             'Description' => $room->description,
             'Total points' => Room\Point::getForRoom($room)->count(),
+            'Points lifetime' => $room->points_lifetime > 0
+                ? $room->points_lifetime . ' hrs.'
+                : 'infinitely',
             'Anonymous' => $room->is_anonymous ? 'Yes' : 'No',
             'Public' => $room->is_public ? 'Yes' : 'No',
             'Password required' => $room->hasPassword() ? 'Yes' : 'No',

@@ -21,7 +21,6 @@ class Point extends Model
     public static function getForRoom(Room $room): Collection
     {
         return static::filterByRoom($room)
-            ->notExpired()
             ->get();
     }
 
@@ -34,7 +33,6 @@ class Point extends Model
     public static function countForRoom(Room $room): int
     {
         return static::filterByRoom($room)
-            ->notExpired()
             ->count();
     }
 
@@ -48,14 +46,14 @@ class Point extends Model
     public static function storeForRoom(Room $room, User $user, Location $location): self
     {
         return static::updateOrCreate([
-                'room_uuid' => $room->uuid,
-                'owner_hash' => $user->getHash(),
-            ], [
-                'location' => new GeoPoint($location->getLatitude(), $location->getLongitude()),
-                'username' => $room->is_anonymous
-                    ? null
-                    : $user->getUsername()
-            ]);
+            'room_uuid' => $room->uuid,
+            'owner_hash' => $user->getHash(),
+        ], [
+            'location' => new GeoPoint($location->getLatitude(), $location->getLongitude()),
+            'username' => $room->is_anonymous
+                ? null
+                : $user->getUsername()
+        ]);
     }
 
     protected $collection = 'room_points';
@@ -70,17 +68,23 @@ class Point extends Model
      */
     public function scopeFilterByRoom(Builder $builder, Room $room): void
     {
-        $builder->where('room_uuid', $room->uuid);
+        $builder
+            ->where('room_uuid', $room->uuid)
+            ->notExpired($room->points_lifetime);
     }
 
     /**
-     * Фильтрация точек по дате обновления за последниу 24 часа
+     * Фильтрация точек по дате обновления
      * @param Builder $builder
+     * @param int $lifeTimeHours
      */
-    public function scopeNotExpired(Builder $builder): void
+    public function scopeNotExpired(Builder $builder, int $lifeTimeHours = 0): void
     {
-        $builder->where('updated_at', '>', now()->subDay())
-            ->latest('updated_at');
+        if ($lifeTimeHours > 0) {
+            $builder->where('updated_at', '>', now()->subHours($lifeTimeHours));
+        }
+
+        $builder->latest('updated_at');
     }
 
     /**

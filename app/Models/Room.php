@@ -6,16 +6,60 @@ use App\Infrastructure\Telegram\User as TelegramUser;
 use App\Models\Concerns\UsesUuid;
 use App\Models\Concerns\WithLocation;
 use App\Models\Room\Point;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
+use MStaack\LaravelPostgis\Geometries\Point as GeoPoint;
 
 class Room extends Model
 {
     use UsesUuid, WithLocation;
 
+    /**
+     * Получение списка публичных ближайших комнат в заданном радиусе
+     * @param GeoPoint $point
+     * @param int $meters
+     * @return Collection
+     */
+    public static function nearest(GeoPoint $point, int $meters = 1000): Collection
+    {
+        $points = Point::where('location', 'near', [
+            '$geometry' => [
+                'type' => 'Point',
+                'coordinates' => [
+                    $point->getLng(), // longitude
+                    $point->getLat(), // latitude
+                ],
+            ],
+            '$maxDistance' => $meters,
+        ])->distinct('room_uuid')->get()->map(function (Point $point) {
+            return $point->attributes[0] ?? null;
+        })->filter();
+
+        if ($points->isEmpty()) {
+            return new Collection();
+        }
+
+        return static::whereIn('uuid', $points)->public()->get();
+    }
+
     protected $guarded = ['uuid'];
+
+    protected $casts = [
+        'points_lifetime' => 'int'
+    ];
+
+    /**
+     * Фильтрация только публичных комнат
+     * @param Builder $builder
+     */
+    public function scopePublic(Builder $builder): void
+    {
+        $builder->where('is_public', true);
+    }
 
     /**
      * Получение даты последней активности в комнате
@@ -26,7 +70,6 @@ class Room extends Model
     public function lastActivity(): ?Carbon
     {
         $lastPoint = Point::filterByRoom($this)
-            ->notExpired()
             ->first();
 
         if ($lastPoint) {

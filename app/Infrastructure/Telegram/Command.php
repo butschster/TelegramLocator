@@ -120,9 +120,7 @@ abstract class Command implements Contracts\Command
             $command .= implode("\n", $args) . "\n";
         }
 
-        $command .= "```";
-
-        return $command . "\n";
+        return $command . "```" . "\n";
     }
 
     /**

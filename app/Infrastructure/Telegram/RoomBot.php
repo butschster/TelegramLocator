@@ -2,6 +2,7 @@
 
 namespace App\Infrastructure\Telegram;
 
+use App\Infrastructure\Telegram\Contracts\Api as ApiContract;
 use App\Infrastructure\Telegram\Contracts\Command;
 use App\Models\Room;
 use App\Telegram\Room\StoreLocation;
@@ -13,17 +14,18 @@ class RoomBot implements Contracts\Bot
     private BotMan $botMan;
     private Room $room;
     private CommandsManager $commands;
+    private ApiContract $api;
 
-    public function __construct(BotMan $botMan, Room $room, CommandsManager $commands)
+    public function __construct(BotMan $botMan, ApiContract $api, Room $room, CommandsManager $commands)
     {
         $this->botMan = $botMan;
         $this->room = $room;
         $this->commands = $commands;
+        $this->api = $api;
     }
 
     public function handleCommand(): void
     {
-
         $this->commands->register(function (BotMan $botMan, Command $command) {
             // Если команды имеют флаг "Только для менеджера", то обычный
             // пользователь не может их видеть и выполнять
@@ -40,7 +42,7 @@ class RoomBot implements Contracts\Bot
 
         // Добавляем команду для отправки текущей позиции пользователя
         $this->botMan->receivesLocation(function($bot, Location $location) {
-            $command = new StoreLocation($this->botMan);
+            $command = new StoreLocation($this->botMan, $this->api);
 
             $args = $command->args();
             $args->setArgument('room', $this->room);

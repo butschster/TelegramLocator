@@ -67,6 +67,7 @@ class BotManager implements Contracts\BotManager
 
         return new RoomBot(
             $botMan,
+            $this->api,
             $room,
             new CommandsManager($botMan, $this->api, $this->roomCommands)
         );
@@ -75,6 +76,7 @@ class BotManager implements Contracts\BotManager
     /**
      * Регистрация вебхука для комнаты
      * @param Room $room
+     * @return string
      * @throws GuzzleException
      */
     public function registerWebhookForRoom(Room $room): string

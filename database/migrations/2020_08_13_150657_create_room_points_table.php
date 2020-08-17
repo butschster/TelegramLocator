@@ -21,10 +21,6 @@ class CreateRoomPointsTable extends Migration
             $table->point('location');
             $table->unique(['room_uuid', 'owner_hash']);
             $table->timestamps();
-
-            $table->foreign('room_uuid')
-                ->references('uuid')
-                ->on('rooms');
         });
     }
 
