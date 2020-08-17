@@ -2,6 +2,7 @@
 
 namespace App\Infrastructure\Telegram;
 
+use App\Infrastructure\Telegram\Contracts\Api as ApiContract;
 use App\Infrastructure\Telegram\Contracts\BotManager as BotManagerConstruct;
 use BotMan\BotMan\Drivers\DriverManager;
 use BotMan\Drivers\Telegram\TelegramDriver;
@@ -17,10 +18,15 @@ class TelegramServiceProvider extends ServiceProvider
         $this->app->singleton(BotManagerConstruct::class, function () {
             return new BotManager(
                 new Client(),
+                $this->app[ApiContract::class],
                 config('telegram.manager.token'),
                 (array) config('telegram.manager.commands'),
                 (array) config('telegram.room.commands')
             );
+        });
+
+        $this->app->singleton(ApiContract::class, function () {
+            return new Api;
         });
     }
 }

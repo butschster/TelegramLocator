@@ -2,15 +2,18 @@
 
 namespace App\Infrastructure\Telegram;
 
+use App\Infrastructure\Telegram\Contracts\Api as ApiContract;
 use App\Infrastructure\Telegram\Contracts\Command;
 use App\Infrastructure\Telegram\Exceptions\TelegramWebhookException;
 use App\Models\Room;
-use BotMan\BotMan\BotMan;
-use BotMan\BotMan\BotManFactory;
+use BotMan\BotMan\Drivers\DriverManager;
+use BotMan\BotMan\Http\Curl;
+use BotMan\BotMan\Storages\Drivers\FileStorage;
 use GuzzleHttp\ClientInterface;
 use BotMan\BotMan\Cache\LaravelCache;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\GuzzleException;
+use Symfony\Component\HttpFoundation\Request;
 
 class BotManager implements Contracts\BotManager
 {
@@ -20,9 +23,11 @@ class BotManager implements Contracts\BotManager
     private array $managerCommands;
     /** @var Command[] */
     private array $roomCommands;
+    private ApiContract $api;
 
     public function __construct(
         ClientInterface $http,
+        ApiContract $api,
         string $managerToken,
         array $managerCommands = [],
         array $roomCommands = []
@@ -32,6 +37,7 @@ class BotManager implements Contracts\BotManager
         $this->managerToken = $managerToken;
         $this->managerCommands = $managerCommands;
         $this->roomCommands = $roomCommands;
+        $this->api = $api;
     }
 
     /**
@@ -45,7 +51,7 @@ class BotManager implements Contracts\BotManager
 
         return new ManagerBot(
             $botMan,
-            new CommandsManager($botMan, $this->managerCommands)
+            new CommandsManager($botMan, $this->api, $this->managerCommands)
         );
     }
 
@@ -62,7 +68,7 @@ class BotManager implements Contracts\BotManager
         return new RoomBot(
             $botMan,
             $room,
-            new CommandsManager($botMan, $this->roomCommands)
+            new CommandsManager($botMan, $this->api, $this->roomCommands)
         );
     }
 
@@ -118,13 +124,25 @@ class BotManager implements Contracts\BotManager
      */
     protected function createBotManInstance(string $token): BotMan
     {
-        return BotManFactory::create([
+        $config = [
             'telegram' => [
                 'token' => $token,
                 'default_additional_parameters' => [
                     'parse_mode' => 'markdown'
                 ]
             ]
-        ], new LaravelCache());
+        ];
+
+        $driverManager = new DriverManager($config, new Curl());
+
+        return new BotMan(
+            new LaravelCache(),
+            $driverManager->getMatchingDriver(
+                Request::createFromGlobals()
+            ),
+            $config,
+            new FileStorage(storage_path('framework/cache')),
+            new CommandMatcher()
+        );
     }
 }

@@ -8,9 +8,17 @@ use App\Models\Room;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Psr\Log\LoggerInterface;
 
 class TelegramController extends Controller
 {
+    private LoggerInterface $log;
+
+    public function __construct(LoggerInterface $log)
+    {
+        $this->log = $log;
+    }
+
     /**
      * Получение списка точек за последние 24 часа в формате GeoJSON
      * @param Request $request
@@ -18,7 +26,7 @@ class TelegramController extends Controller
      * @return array
      * @throws AuthorizationException
      */
-    public function getPointsForLastDay(Request $request, Room $room)
+    public function getPointsForLastDay(Request $request, Room $room): array
     {
         $this->authorize('show', $room);
 
@@ -64,9 +72,10 @@ class TelegramController extends Controller
      * @param Room $room
      * @return string
      */
-    public function roomWebhook(BotManager $bots, Room $room)
+    public function roomWebhook(BotManager $bots, Room $room): string
     {
         $bots->forRoom($room)->handleCommand();
+        $this->log->debug('request', request()->all());
 
         return 'OK';
     }
@@ -76,9 +85,10 @@ class TelegramController extends Controller
      * @param BotManager $bots
      * @return string
      */
-    public function managerWebhook(BotManager $bots)
+    public function managerWebhook(BotManager $bots): string
     {
         $bots->forManager()->handleCommand();
+        $this->log->debug('request', request()->all());
 
         return 'OK';
     }

@@ -2,6 +2,7 @@
 
 namespace App\Infrastructure\Telegram;
 
+use App\Infrastructure\Telegram\Contracts\Api as ApiContract;
 use BotMan\BotMan\BotMan;
 use Closure;
 use Exception;
@@ -17,13 +18,12 @@ class CommandsManager
      */
     private Collection $commands;
 
-    public function __construct(BotMan $botMan, array $commands)
+    public function __construct(BotMan $botMan, ApiContract $api, array $commands)
     {
         $this->botMan = $botMan;
-        $this->commands = collect($commands)
-            ->map(function ($command) {
-                return new $command($this->botMan);
-            });
+        $this->commands = collect($commands)->map(function ($command) use($api) {
+            return new $command($this->botMan, $api);
+        });
     }
 
     /**
@@ -34,7 +34,7 @@ class CommandsManager
     public function register(?Closure $filter = null, ?Closure $handler = null)
     {
         foreach ($this->commands as $command) {
-            $this->botMan->hears($command->pattern(), function ($bot, ...$args) use ($filter, $handler, $command) {
+            $this->botMan->hears($command->name(), function ($bot, ...$args) use ($filter, $handler, $command) {
                 if ($filter && !$filter($bot, $command)) {
                     throw new AuthorizationException();
                 }

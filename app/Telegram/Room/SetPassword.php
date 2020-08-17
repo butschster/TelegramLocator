@@ -36,7 +36,7 @@ class SetPassword extends ManagerCommand
     public function argsRules(): array
     {
         return [
-            'password' => ['required', 'string', 'min:1', 'max:128'],
+            'password' => ['required', 'string', 'min:6', 'max:128'],
         ];
     }
 }

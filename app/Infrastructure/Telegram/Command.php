@@ -18,10 +18,12 @@ abstract class Command implements Contracts\Command
     private InputDefinition $definition;
     protected ?string $name = null;
     private ?TelegramUser $user = null;
+    protected Contracts\Api $api;
 
-    public function __construct(BotMan $bot)
+    public function __construct(BotMan $bot, Contracts\Api $api)
     {
         $this->bot = $bot;
+        $this->api = $api;
         $this->definition = new InputDefinition();
         $this->configureUsingFluentDefinition();
     }
