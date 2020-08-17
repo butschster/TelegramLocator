@@ -31,6 +31,11 @@ task('nginx:reload', function () {
     run('sudo systemctl restart nginx.service');
 });
 
+task('telegram:register-webhooks', function () {
+    run('{{bin/php}} {{release_path}}/artisan telegram:register-webhooks');
+});
+
+
 after('deploy:failed', 'deploy:unlock');
 before('deploy:symlink', 'artisan:migrate');
 
