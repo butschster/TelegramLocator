@@ -18,6 +18,7 @@
         "guzzlehttp/guzzle": "^6.3",
         "jenssegers/mongodb": "dev-develop",
         "laravel/framework": "^7.24",
+        "laravel/horizon": "^4.3",
         "laravel/tinker": "^2.0",
         "mstaack/laravel-postgis": "^5.0",
         "ramsey/uuid": "^3.0",

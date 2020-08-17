@@ -4,8 +4,8 @@ namespace App\Telegram\Room;
 
 use App\Infrastructure\Telegram\Command;
 use App\Infrastructure\Telegram\StringInput;
+use App\Jobs\Points\StorePoint;
 use App\Models\Room;
-use Illuminate\Support\Facades\Cache;
 use BotMan\BotMan\Messages\Attachments\Location;
 
 class StoreLocation extends Command
@@ -31,9 +31,11 @@ class StoreLocation extends Command
 
         $hash = $this->getUser()->getHash();
 
-        $lock = Cache::lock('points:' . $hash, 30);
+        $lock = $this->getUser()->getLock();
         if ($lock->get()) {
-            Room\Point::storeForRoom($room, $this->getUser(), $location);
+            dispatch(
+                new StorePoint($room->uuid, $this->getUser(), $location)
+            );
             $this->bot->reply('Your location is stored.');
         } else {
             $this->bot->reply('Slow down...');

@@ -2,6 +2,9 @@
 
 namespace App\Infrastructure\Telegram;
 
+use Illuminate\Contracts\Cache\Lock;
+use Illuminate\Support\Facades\Cache;
+
 class User
 {
     private int $userId;
@@ -31,5 +34,14 @@ class User
     public function getUsername(): string
     {
         return $this->username;
+    }
+
+    /**
+     * @param int $seconds
+     * @return Lock
+     */
+    public function getLock(int $seconds = 30): Lock
+    {
+        return Cache::lock('user:' . $this->getHash(), $seconds);
     }
 }
