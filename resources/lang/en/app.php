@@ -7,6 +7,7 @@ return [
         'fallback' => 'Sorry, I did not understand these commands. Use /help command to get a list of available commands.',
         'empty_list_of_commands' => 'Commands not found',
         'invalid_data' => 'Invalid data',
+        'invalid_bot_token' => 'Invalid Telegram bot token',
         'error' => 'Sorry, something went wrong',
         'manager' => [
             'register_required' => 'You should register an account. Use /register command.',

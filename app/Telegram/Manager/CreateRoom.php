@@ -7,6 +7,7 @@ use App\Infrastructure\Telegram\Exceptions\TelegramWebhookException;
 use App\Infrastructure\Telegram\ManagerCommand;
 use App\Infrastructure\Telegram\StringInput;
 use App\Models\Room;
+use App\Validation\Rules\TelegramToken;
 use Exception;
 use Telegram\Bot\Exceptions\TelegramSDKException;
 
@@ -69,7 +70,7 @@ class CreateRoom extends ManagerCommand
     public function argsRules(): array
     {
         return [
-            'token' => ['regex:/[0-9]{9}:[a-zA-Z0-9_-]{35}/m']
+            'token' => [new TelegramToken()]
         ];
     }
 }

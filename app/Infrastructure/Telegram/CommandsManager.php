@@ -146,7 +146,7 @@ class CommandsManager
             $bot->replyAll($e->getMessage());
         });
 
-        $this->botMan->exception(Exception::class, function ($e, BotMan $bot) {
+        $this->botMan->exception(Exception::class, function (Exception $e, BotMan $bot) {
             $bot->replyAll(
                 config('app.debug')
                     ? $e->getMessage()

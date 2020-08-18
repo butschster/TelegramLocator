@@ -4,6 +4,7 @@ namespace App\Telegram\Manager;
 
 use App\Infrastructure\Telegram\ManagerCommand;
 use App\Infrastructure\Telegram\StringInput;
+use App\Validation\Rules\TelegramToken;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class DeleteRoom extends ManagerCommand
@@ -38,5 +39,12 @@ class DeleteRoom extends ManagerCommand
                 trans('app.command.delete_room.room_not_found')
             );
         }
+    }
+
+    public function argsRules(): array
+    {
+        return [
+            'token' => [new TelegramToken()]
+        ];
     }
 }
