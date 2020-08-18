@@ -18,13 +18,19 @@ class StringInput extends ArgvInput
      */
     public function __construct(string $input, InputDefinition $definition)
     {
-        $tokens = $this->tokenize($input);
+        $tokens = (array) $this->tokenize($input);
 
         // strip the application name
         array_shift($tokens);
         if ($definition->getArgumentCount() === 1) {
             $this->setTokens($tokens = [implode(' ', $tokens)]);
+        } else {
+            $this->setTokens($tokens);
         }
+
+        logger()->debug('Command arguments', [
+            'args' => $tokens
+        ]);
 
         $this->bind($definition);
         $this->validate();

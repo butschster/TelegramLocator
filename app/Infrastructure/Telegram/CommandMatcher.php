@@ -26,15 +26,29 @@ class CommandMatcher extends Matcher
         $matched = false;
         $this->matches = [];
 
+        $logger = logger();
+
+        $logger->debug('Pattern validation', [
+            'pattern' => $pattern,
+            'text' => $message->getText()
+        ]);
+
         // Проверяем на то, что пришла команда от пользователя
         if ($this->isCommand($pattern) && $pattern === $this->getIncomingMessageCommand($message)) {
             $matched = true;
 
-        // Проверяем что пришла информация о местоположении и оно текущее
+            $logger->debug('Pattern validated', [
+                'type' => 'command'
+            ]);
+            // Проверяем что пришла информация о местоположении и оно текущее
         } else if ($this->isLocation($pattern) && $pattern === $message->getText() && $this->isCurrentLocation($message)) {
             $matched = true;
 
-        // Провреяем остальные варианты
+            $logger->debug('Pattern validated', [
+                'type' => 'location'
+            ]);
+
+            // Провреяем остальные варианты
         } else {
             $answerText = $answer->getValue();
             if (is_array($answerText)) {
@@ -46,6 +60,13 @@ class CommandMatcher extends Matcher
 
             $matched = (bool)preg_match($text, $message->getText(), $this->matches)
                 || (bool)preg_match($text, $answerText, $this->matches);
+
+
+            if ($matched) {
+                $logger->debug('Pattern validated', [
+                    'type' => 'text'
+                ]);
+            }
         }
 
         // Try middleware first
