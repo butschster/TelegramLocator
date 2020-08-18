@@ -16,7 +16,7 @@ class MakePrivate extends ManagerCommand
 
     public function description(): string
     {
-        return 'Make room private';
+        return trans('app.command.make_private.description');
     }
 
     public function handle(StringInput $input): void
@@ -28,6 +28,8 @@ class MakePrivate extends ManagerCommand
             'is_public' => false
         ]);
 
-        $this->bot->reply('Done. Room is private now.');
+        $this->bot->reply(
+            trans('app.command.make_private.updated')
+        );
     }
 }

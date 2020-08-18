@@ -2,6 +2,9 @@
 
 return [
     'webhook_secret' => env('WEBHOOK_SECRET'),
+    'middleware' => [
+        App\Telegram\MIddleware\DetectUserLocale::class,
+    ],
 
     /*
     |--------------------------------------------------------------------------

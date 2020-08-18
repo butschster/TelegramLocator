@@ -14,12 +14,15 @@ class CreateRoom extends ManagerCommand
 {
     public function signature(): string
     {
-        return '/new {token : Telegram bot API token}';
+        return sprintf(
+            '/new {token : %s}',
+            trans('app.command.create_room.token')
+        );
     }
 
     public function description(): string
     {
-        return 'Create a new room';
+        return trans('app.command.create_room.description');
     }
 
     public function handle(StringInput $input): void
@@ -28,14 +31,18 @@ class CreateRoom extends ManagerCommand
         $room = Room::where('telegram_token', $token)->first();
 
         if ($room) {
-            $this->bot->reply('Room with given token exists.');
+            $this->bot->reply(
+                trans('app.command.create_room.room_exists')
+            );
             return;
         }
 
         try {
             $bot = $this->api->getMe($token);
         } catch (TelegramSDKException $e) {
-            $this->bot->reply('Invalid telegram bot token. Please try again!');
+            $this->bot->reply(
+                trans('app.command.create_room.invalid_token')
+            );
             return;
         }
 
@@ -48,12 +55,14 @@ class CreateRoom extends ManagerCommand
         try {
             app(BotManager::class)->registerWebhookForRoom($room);
 
-            $this->bot->reply(sprintf('Room @%s successful registered.', $room->name));
+            $this->bot->reply(
+                trans('app.command.create_room.registered', ['room' => $room->name])
+            );
         } catch (TelegramWebhookException $e) {
-            $this->bot->reply('Invalid telegram bot token. Please try again!');
+            $this->bot->reply(
+                trans('app.command.create_room.invalid_token')
+            );
             $room->delete();
-        } catch (Exception $e) {
-            $this->bot->reply('Something went wrong.');
         }
     }
 

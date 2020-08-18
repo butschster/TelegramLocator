@@ -13,17 +13,20 @@ class RoomBot implements Contracts\Bot
     private Room $room;
     private CommandsManager $commands;
     private ApiContract $api;
+    private MiddlewareManager $middleware;
 
-    public function __construct(BotMan $botMan, ApiContract $api, Room $room, CommandsManager $commands)
+    public function __construct(BotMan $botMan, ApiContract $api, Room $room, CommandsManager $commands, MiddlewareManager $middleware)
     {
         $this->botMan = $botMan;
         $this->room = $room;
         $this->commands = $commands;
         $this->api = $api;
+        $this->middleware = $middleware;
     }
 
     public function handleCommand(): void
     {
+        $this->middleware->register($this->botMan);
         $this->commands->listen(function (BotMan $botMan, Command $command) {
 
             // Если команды имеют флаг "Только для менеджера", то обычный

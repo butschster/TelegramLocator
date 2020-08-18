@@ -10,12 +10,15 @@ class DeleteRoom extends ManagerCommand
 {
     public function signature(): string
     {
-        return '/del {token : Telegram bot API token}';
+        return sprintf(
+            '/del {token : %s}',
+            trans('app.command.delete_room.token')
+        );
     }
 
     public function description(): string
     {
-        return 'Delete room and all points';
+        return trans('app.command.delete_room.description');
     }
 
     public function handle(StringInput $input): void
@@ -27,9 +30,13 @@ class DeleteRoom extends ManagerCommand
                 ->where('telegram_token', $input->getArgument('token'))
                 ->firstOrFail();
             $room->delete();
-            $this->bot->reply('Room deleted.');
+            $this->bot->reply(
+                trans('app.command.delete_room.deleted')
+            );
         } catch (ModelNotFoundException $e) {
-            $this->bot->reply('Room not found.');
+            $this->bot->reply(
+                trans('app.command.delete_room.room_not_found')
+            );
         }
     }
 }

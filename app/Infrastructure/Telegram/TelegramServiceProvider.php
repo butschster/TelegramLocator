@@ -21,7 +21,8 @@ class TelegramServiceProvider extends ServiceProvider
                 $this->app[ApiContract::class],
                 config('telegram.manager.token'),
                 (array) config('telegram.manager.commands'),
-                (array) config('telegram.room.commands')
+                (array) config('telegram.room.commands'),
+                (array) config('telegram.middleware')
             );
         });
 

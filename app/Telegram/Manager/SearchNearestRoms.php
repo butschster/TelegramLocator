@@ -18,7 +18,7 @@ class SearchNearestRoms extends Command
 
     public function description(): string
     {
-        return 'Search public rooms in 1km radius near by coordinates';
+        return trans('app.command.search_nearest_room.description');
     }
 
     public function handle(StringInput $input): void
@@ -29,11 +29,13 @@ class SearchNearestRoms extends Command
         ));
 
         if ($rooms->isEmpty()) {
-            $this->bot->reply('Nothing found near you.');
+            $this->bot->reply(
+                trans('app.command.search_nearest_room.nothing_found')
+            );
             return;
         }
 
-        $result = sprintf("We found [%d] public rooms near by you.\n\n", $rooms->count());
+        $result = sprintf("%s\n\n", trans('app.command.search_nearest_room.found_rooms', ['total' => $rooms->count()]));
 
         foreach ($rooms as $room) {
             if (!empty($room->title)) {

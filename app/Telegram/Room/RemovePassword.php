@@ -15,7 +15,7 @@ class RemovePassword extends ManagerCommand
 
     public function description(): string
     {
-        return 'Remove room password';
+        return trans('app.command.remove_password.description');
     }
 
     public function handle(StringInput $input): void
@@ -27,6 +27,8 @@ class RemovePassword extends ManagerCommand
             'password' => null
         ]);
 
-        $this->bot->reply('Password for room removed.');
+        $this->bot->reply(
+            trans('app.command.remove_password.updated')
+        );
     }
 }

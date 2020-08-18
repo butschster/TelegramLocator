@@ -45,7 +45,7 @@ abstract class Command implements Contracts\Command
             return User::findOrFail($this->getUser()->getHash());
         } catch (ModelNotFoundException $e) {
             throw new AuthorizationException(
-                'You should register an account. Use /register command.'
+                trans('app.command.manager.register_required')
             );
         }
     }
@@ -74,7 +74,9 @@ abstract class Command implements Contracts\Command
     public function checkAuthentication(Room $room): void
     {
         if (!$room->hasAccess($this->getUser())) {
-            throw new AuthorizationException('Unauthorized! Please use /room_auth for authentication.');
+            throw new AuthorizationException(
+                trans('app.command.user.unauthorized')
+            );
         }
     }
 

@@ -72,7 +72,7 @@ class CommandsManager
         $this->registerHelp($filter);
 
         $this->botMan->fallback(function ($bot) {
-            $bot->reply('Sorry, I did not understand these commands. Use /help command to get a list of available commands.');
+            $bot->reply(trans('app.command.fallback'));
         });
     }
 
@@ -83,7 +83,9 @@ class CommandsManager
             $text = "";
 
             $groupedCommands = $this->commands->groupBy(function ($command) {
-                return $command->forManager() ? "Manager commands" : "User commands";
+                return $command->forManager()
+                    ? trans('app.command.for_manager')
+                    : trans('app.command.for_user');
             });
 
             foreach ($groupedCommands as $group => $commands) {
@@ -98,14 +100,14 @@ class CommandsManager
             if (!empty($text)) {
                 $this->botMan->reply($text);
             } else {
-                $this->botMan->reply('Commands not found.');
+                $this->botMan->reply(trans('app.command.empty_list_of_commands'));
             }
         });
 
 
         // Список команд в формате для добавления в настройках бота
         $this->botMan->hears('/commands', function ($bot) use ($filter) {
-            $text = "help - list of available commands\n";
+            $text = sprintf("help - %s\n", trans('app.command.help.description'));
 
             foreach ($this->commands as $command) {
                 if (!$filter || $filter($bot, $command)) {
@@ -133,7 +135,7 @@ class CommandsManager
                 return $message;
             })->implode("\n");
 
-            $bot->reply(sprintf("*Data is not valid*\n```\n%s\n```", $errors));
+            $bot->reply(sprintf("*%s*\n```\n%s\n```", trans('app.command.invalid_data'), $errors));
         });
 
         $this->botMan->exception(AuthorizationException::class, function ($e, BotMan $bot) {
@@ -146,7 +148,9 @@ class CommandsManager
 
         $this->botMan->exception(Exception::class, function ($e, BotMan $bot) {
             $bot->replyAll(
-                config('app.debug') ? $e->getMessage() : 'Sorry, something went wrong'
+                config('app.debug')
+                    ? $e->getMessage()
+                    : trans('app.command.error')
             );
         });
     }

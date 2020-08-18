@@ -18,7 +18,7 @@ class UpdateRoomLocation extends ManagerCommand
 
     public function description(): string
     {
-        return 'Update room location';
+        return trans('app.command.update_room_location.description');
     }
 
     public function handle(StringInput $input): void
@@ -33,7 +33,9 @@ class UpdateRoomLocation extends ManagerCommand
             ),
         ]);
 
-        $this->bot->reply('Room location updated.');
+        $this->bot->reply(
+            trans('app.command.update_room_location.updated')
+        );
     }
 
     public function argsRules(): array

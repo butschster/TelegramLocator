@@ -10,12 +10,15 @@ class SetPointsLifeTime extends ManagerCommand
 {
     public function signature(): string
     {
-        return '/setpointslifetime {hours : Lifetime in hours. (0 - infinitely. Max 87600 - 10 years.)}';
+        return sprintf(
+            '/setpointslifetime {hours : %s}',
+            trans('app.command.set_points_lifetime.hours')
+        );
     }
 
     public function description(): string
     {
-        return 'Set room points lifetime.';
+        return trans('app.command.set_points_lifetime.description');
     }
 
     public function handle(StringInput $input): void
@@ -27,7 +30,9 @@ class SetPointsLifeTime extends ManagerCommand
             'points_lifetime' => $input->getArgument('hours')
         ]);
 
-        $this->bot->reply('Points lifetime changed.');
+        $this->bot->reply(
+            trans('app.command.set_points_lifetime.updated')
+        );
     }
 
     public function argsRules(): array

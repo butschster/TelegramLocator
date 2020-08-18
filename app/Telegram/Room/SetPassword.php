@@ -11,12 +11,15 @@ class SetPassword extends ManagerCommand
 {
     public function signature(): string
     {
-        return '/setpwd {password : Room password}';
+        return sprintf(
+            '/setpwd {password : %s}',
+            trans('app.command.set_password.password')
+        );
     }
 
     public function description(): string
     {
-        return 'Set room password';
+        return trans('app.command.set_password.description');
     }
 
     public function handle(StringInput $input): void
@@ -30,7 +33,9 @@ class SetPassword extends ManagerCommand
             )
         ]);
 
-        $this->bot->reply('Password for room set.');
+        $this->bot->reply(
+            trans('app.command.set_password.updated')
+        );
     }
 
     public function argsRules(): array

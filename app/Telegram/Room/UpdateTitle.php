@@ -12,12 +12,15 @@ class UpdateTitle extends ManagerCommand
 {
     public function signature(): string
     {
-        return '/settitle {title : Room title}';
+        return sprintf(
+            '/settitle {title : %s}',
+            trans('app.command.update_room_title.arg')
+        );
     }
 
     public function description(): string
     {
-        return 'Update room title';
+        return trans('app.command.update_room_title.description');
     }
 
     public function handle(StringInput $input): void
@@ -29,7 +32,9 @@ class UpdateTitle extends ManagerCommand
             'title' => $input->getArgument('title')
         ]);
 
-        $this->bot->reply('Room title updated.');
+        $this->bot->reply(
+            trans('app.command.update_room_title.updated')
+        );
     }
 
     public function argsRules(): array

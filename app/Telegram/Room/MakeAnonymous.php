@@ -16,7 +16,7 @@ class MakeAnonymous extends ManagerCommand
 
     public function description(): string
     {
-        return 'Make room anonymous';
+        return trans('app.command.make_anonymous.description');
     }
 
     public function handle(StringInput $input): void
@@ -28,6 +28,8 @@ class MakeAnonymous extends ManagerCommand
             'is_anonymous' => true
         ]);
 
-        $this->bot->reply('Done.');
+        $this->bot->reply(
+            trans('app.command.make_anonymous.updated')
+        );
     }
 }

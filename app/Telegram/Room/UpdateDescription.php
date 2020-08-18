@@ -10,12 +10,15 @@ class UpdateDescription extends ManagerCommand
 {
     public function signature(): string
     {
-        return '/setdescription {description : Room description}';
+        return sprintf(
+            '/setdescription {description : %s}',
+            trans('app.command.update_room_description.arg')
+        );
     }
 
     public function description(): string
     {
-        return 'Update room title';
+        return trans('app.command.update_room_description.description');
     }
 
     public function handle(StringInput $input): void
@@ -27,7 +30,9 @@ class UpdateDescription extends ManagerCommand
             'description' => $input->getArgument('description')
         ]);
 
-        $this->bot->reply('Room description updated.');
+        $this->bot->reply(
+            trans('app.command.update_room_description.updated')
+        );
     }
 
     public function argsRules(): array
