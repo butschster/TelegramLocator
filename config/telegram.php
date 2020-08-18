@@ -39,6 +39,7 @@ return [
             App\Telegram\Room\AuthUser::class,
             App\Telegram\Room\GetInformation::class,
             App\Telegram\Room\StoreLocation::class,
+            App\Telegram\Room\SendMessage::class,
         ]
     ],
 ];

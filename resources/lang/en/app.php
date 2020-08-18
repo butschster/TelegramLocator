@@ -27,7 +27,7 @@ return [
             'invalid_lng' => 'The :attribute must be a valid longitude, with a limit of 20 digits after a decimal point'
         ],
         'create_room' => [
-            'description' => 'Create a new room',
+            'description' => 'Register a new room',
             'token' => 'Telegram bot API token',
             'room_exists' => 'Room with given token exists.',
             'invalid_token' => 'Invalid telegram bot token. Please try again!',
@@ -102,6 +102,12 @@ return [
         'update_room_location' => [
             'description' => 'Update room location',
             'updated' => 'Room location updated.'
+        ],
+        'send_message' => [
+            'description' => 'Send your message',
+            'message' => 'Your message.',
+            'sent' => 'Your message was sent.',
+            'point_not_found' => 'At first you should send your location'
         ]
     ]
 ];

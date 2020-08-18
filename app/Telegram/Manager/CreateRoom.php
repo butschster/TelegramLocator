@@ -56,7 +56,7 @@ class CreateRoom extends ManagerCommand
             app(BotManager::class)->registerWebhookForRoom($room);
 
             $this->bot->reply(
-                trans('app.command.create_room.registered', ['room' => $room->name])
+                trans('app.command.create_room.registered', ['name' => $room->name])
             );
         } catch (TelegramWebhookException $e) {
             $this->bot->reply(

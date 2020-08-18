@@ -18,7 +18,16 @@ class StringInput extends ArgvInput
      */
     public function __construct(string $input, InputDefinition $definition)
     {
-        parent::__construct($this->tokenize($input), $definition);
+        $tokens = $this->tokenize($input);
+
+        // strip the application name
+        array_shift($tokens);
+        if ($definition->getArgumentCount() === 1) {
+            $this->setTokens($tokens = [implode(' ', $tokens)]);
+        }
+
+        $this->bind($definition);
+        $this->validate();
     }
 
     /** {@inheritdoc} */
@@ -40,7 +49,8 @@ class StringInput extends ArgvInput
     /**
      * Tokenizes a string.
      *
-     * @throws InvalidArgumentException When unable to parse input (should never happen)
+     * @param string $input
+     * @return array
      */
     private function tokenize(string $input): array
     {

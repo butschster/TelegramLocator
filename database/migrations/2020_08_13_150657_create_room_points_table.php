@@ -15,10 +15,11 @@ class CreateRoomPointsTable extends Migration
     {
         Schema::connection('mongodb')->create('room_points', function (Blueprint $table) {
             $table->id();
-            $table->uuid('room_uuid');
+            $table->uuid('room_uuid')->index();
             $table->string('owner_hash');
             $table->string('username')->nullable();
             $table->point('location');
+            $table->text('message')->nullable();
             $table->unique(['room_uuid', 'owner_hash']);
             $table->timestamps();
         });

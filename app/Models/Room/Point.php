@@ -20,8 +20,21 @@ class Point extends Model
      */
     public static function getForRoom(Room $room): Collection
     {
+        return static::filterByRoom($room)->get();
+    }
+
+    /**
+     * Получение точки для пользователя
+     *
+     * @param Room $room
+     * @param User $user
+     * @return Point
+     */
+    public static function findByUser(Room $room, User $user): Point
+    {
         return static::filterByRoom($room)
-            ->get();
+            ->where('owner_hash', $user->getHash())
+            ->firstOrFail();
     }
 
     /**
