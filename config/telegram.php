@@ -35,6 +35,7 @@ return [
             App\Telegram\Room\SetPointsLifeTime::class,
             App\Telegram\Room\AuthUser::class,
             App\Telegram\Room\GetInformation::class,
+            App\Telegram\Room\StoreLocation::class,
         ]
     ],
 ];

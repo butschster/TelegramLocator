@@ -4,6 +4,7 @@ namespace App\Infrastructure\Telegram;
 
 use App\Infrastructure\Telegram\Contracts\Api as ApiContract;
 use BotMan\BotMan\BotMan;
+use BotMan\BotMan\Messages\Attachments\Attachment;
 use Closure;
 use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -23,9 +24,20 @@ class CommandsManager
     {
         $this->botMan = $botMan;
         $this->api = $api;
-        $this->commands = collect($commands)->map(function ($command) use($api) {
+        $this->commands = collect($commands)->map(function ($command) use ($api) {
             return new $command($this->botMan, $api);
         });
+    }
+
+    /**
+     * @param Closure|null $filter
+     * @param Closure|null $handler
+     */
+    public function listen(?Closure $filter = null, ?Closure $handler = null): void
+    {
+        $this->registerExceptionsHandler();
+        $this->register($filter, $handler);
+        $this->botMan->listen();
     }
 
     /**
@@ -41,36 +53,21 @@ class CommandsManager
                     throw new AuthorizationException();
                 }
 
-                $args = $command->args();
-
+                $commandArgs = $command->args();
+                foreach ($args as $arg) {
+                    if ($arg instanceof Attachment) {
+                        $key = strtolower(class_basename($arg));
+                        $commandArgs->setArgument($key, $arg);
+                    }
+                }
 
                 if ($handler) {
-                    $handler($command, $args);
+                    $handler($command, $commandArgs);
                 } else {
-                    $command->handle($args);
+                    $command->handle($commandArgs);
                 }
             });
         }
-
-        $this->botMan->exception(Exception::class, function ($e, BotMan $bot) {
-            if ($e instanceof AuthorizationException) {
-                $bot->reply($e->getMessage());
-            } else if($e instanceof ValidationException) {
-                $errors = collect($e->errors())->map(function (array $errors, $field) {
-                    $message = "{$field}\n";
-                    foreach ($errors as $error) {
-                        $message .= " - {$error}\n";
-                    }
-
-                    return $message;
-                })->implode("\n");
-                $bot->reply(sprintf("*Data is not valid*\n```\n%s\n```", $errors));
-            } else {
-                $bot->reply(
-                    config('app.debug') ? $e->getMessage() : 'Sorry, something went wrong'
-                );
-            }
-        });
 
         $this->registerHelp($filter);
 
@@ -102,6 +99,34 @@ class CommandsManager
             } else {
                 $this->botMan->reply('Commands not found.');
             }
+        });
+    }
+
+    protected function registerExceptionsHandler()
+    {
+        $this->botMan->exception(ValidationException::class, function ($e, BotMan $bot) {
+            $errors = collect($e->errors())->map(function (array $errors, $field) {
+                $message = "{$field}\n";
+                foreach ($errors as $error) {
+                    $message .= " - {$error}\n";
+                }
+
+                return $message;
+            })->implode("\n");
+
+            $bot->reply(sprintf("*Data is not valid*\n```\n%s\n```", $errors));
+        });
+
+        $this->botMan->exception(AuthorizationException::class, function ($e, BotMan $bot) {
+            $bot->replyAll($e->getMessage());
+        });
+
+        $this->botMan->exception(Exception::class, function ($e, BotMan $bot) {
+            $bot->replyAll(
+                config('app.debug') ? $e->getMessage() : 'Sorry, something went wrong'
+            );
+
+            throw $e;
         });
     }
 }

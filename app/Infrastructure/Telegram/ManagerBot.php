@@ -17,7 +17,6 @@ class ManagerBot implements Contracts\Bot
 
     public function handleCommand(): void
     {
-        $this->commands->register();
-        $this->botMan->listen();
+        $this->commands->listen();
     }
 }

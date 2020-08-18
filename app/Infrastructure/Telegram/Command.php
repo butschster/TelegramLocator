@@ -104,7 +104,7 @@ abstract class Command implements Contracts\Command
         $command = "*{$this->description()}*\n```\n";
         $command .= sprintf(
             "%s %s\n",
-            $this->name,
+            $this->name(),
             $this->definition->getSynopsis()
         );
 
