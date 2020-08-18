@@ -80,7 +80,9 @@ class CommandMatcher extends Matcher
     protected function isCurrentLocation(IncomingMessage $message): bool
     {
         if ($message->getPayload()->has('venue')) {
-            throw new AuthorizationException('You can only store your current location.');
+            throw new AuthorizationException(
+                trans('app.command.user.only_current_location')
+            );
         }
 
         return true;

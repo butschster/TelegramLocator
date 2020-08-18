@@ -16,7 +16,7 @@ class MakePublic extends ManagerCommand
 
     public function description(): string
     {
-        return 'Make room public';
+        return trans('app.command.make_public.description');
     }
 
     public function handle(StringInput $input): void
@@ -28,6 +28,8 @@ class MakePublic extends ManagerCommand
             'is_public' => true
         ]);
 
-        $this->bot->reply('Done. Room is public now.');
+        $this->bot->reply(
+            trans('app.command.make_public.updated')
+        );
     }
 }

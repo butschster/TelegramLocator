@@ -13,7 +13,7 @@ class StoreLocation extends LocationCommand
 {
     public function description(): string
     {
-        return 'Store user location';
+        return trans('app.command.store_user_location.description');
     }
 
     public function handle(StringInput $input): void
@@ -30,9 +30,16 @@ class StoreLocation extends LocationCommand
             dispatch(
                 new StorePoint($room->uuid, $this->getUser(), $location)
             );
-            $this->bot->reply('Your location has been stored.');
+            $this->bot->reply(
+                trans('app.command.store_user_location.stored', [
+                    'lat' => $location->getLatitude(),
+                    'lng' => $location->getLongitude()
+                ])
+            );
         } else {
-            $this->bot->reply('Slow down...');
+            $this->bot->reply(
+                trans('app.command.store_user_location.slow_down')
+            );
         }
     }
 }

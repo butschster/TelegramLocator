@@ -26,7 +26,7 @@ abstract class LocationCommand extends Command
     {
         $command = "*{$this->description()}*\n```\n";
 
-        $command .= "Just send your current location from mobile phone.";
+        $command .= trans('app.command.location.help');
 
         return $command . "```" . "\n";
     }

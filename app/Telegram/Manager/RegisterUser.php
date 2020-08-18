@@ -15,7 +15,7 @@ class RegisterUser extends Command
 
     public function description(): string
     {
-        return 'Register as a manager';
+        return trans('app.command.manager.register');
     }
 
     public function handle(StringInput $input): void
@@ -23,7 +23,10 @@ class RegisterUser extends Command
         $user = User::findByTelegramUser($this->getUser());
 
         if ($user) {
-            $this->bot->reply('Your account has been already registered.');
+            $this->bot->reply(
+                trans('app.command.manager.account_exists')
+            );
+
             return;
         }
 
@@ -31,9 +34,8 @@ class RegisterUser extends Command
             'id' => $this->getUser()->getHash()
         ]);
 
-        $this->bot->reply(sprintf(
-            'Hello %s! Welcome to our service! We appreciate your privacy and that\'s why we don\'t store any information about you.',
-            $this->getUser()->getUsername()
-        ));
+        $this->bot->reply(
+            trans('app.command.manager.registered', ['username' => $this->getUser()->getUsername()])
+        );
     }
 }

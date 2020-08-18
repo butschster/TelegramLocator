@@ -12,12 +12,15 @@ class AuthUser extends Command
 {
     public function signature(): string
     {
-        return '/auth {password : Room password}';
+        return sprintf(
+            '/auth {password : %s}',
+            trans('app.command.room_auth.password')
+        );
     }
 
     public function description(): string
     {
-        return 'Authenticate user by password';
+        return trans('app.command.room_auth.description');
     }
 
     public function handle(StringInput $input): void
@@ -28,16 +31,22 @@ class AuthUser extends Command
         $user = $this->getUser();
 
         if ($room->hasAccess($user)) {
-            $this->bot->reply('You don\'t need auth.');
+            $this->bot->reply(
+                trans('app.command.room_auth.auth_not_require')
+            );
             return;
         }
 
         if (!Hash::check($password, $room->password)) {
-            throw new AuthorizationException('Incorrect password.');
+            throw new AuthorizationException(
+                trans('app.command.room_auth.incorrect_password')
+            );
         }
 
         $room->addUser($user);
-        $this->bot->reply('Authenticated!');
+        $this->bot->reply(
+            trans('app.command.room_auth.authenticated')
+        );
     }
 
     public function argsRules(): array

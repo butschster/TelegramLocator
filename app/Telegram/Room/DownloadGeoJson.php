@@ -17,7 +17,7 @@ class DownloadGeoJson extends ManagerCommand
 
     public function description(): string
     {
-        return 'Download points in GeoJson format';
+        return trans('app.command.download_points.description');
     }
 
     public function handle(StringInput $input): void
@@ -46,9 +46,8 @@ class DownloadGeoJson extends ManagerCommand
             $sharedData = $sharedLinks[0];
         }
 
-        $this->bot->reply(sprintf(
-            'You can download file here: %s',
-            $sharedData['url']
-        ));
+        $this->bot->reply(
+            trans('app.command.download_points.result', ['link' => $sharedData['url']])
+        );
     }
 }

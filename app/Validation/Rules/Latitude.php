@@ -22,6 +22,6 @@ class Latitude implements Rule
      */
     public function message()
     {
-        return 'The :attribute must be a valid latitude, with a limit of 20 digits after a decimal point';
+        return trans('app.command.location.invalid_lat');
     }
 }

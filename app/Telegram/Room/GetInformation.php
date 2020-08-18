@@ -18,7 +18,7 @@ class GetInformation extends Command
 
     public function description(): string
     {
-        return 'Get information about room';
+        return trans('app.command.get_info.description');
     }
 
     public function handle(StringInput $input): void
