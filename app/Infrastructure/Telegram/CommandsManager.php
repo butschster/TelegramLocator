@@ -78,6 +78,7 @@ class CommandsManager
 
     protected function registerHelp(?Closure $filter = null): void
     {
+        // Список команд со списком аргументов для всех
         $this->botMan->hears('/help', function ($bot) use ($filter) {
             $text = "";
 
@@ -100,6 +101,24 @@ class CommandsManager
                 $this->botMan->reply('Commands not found.');
             }
         });
+
+
+        // Список команд в формате для добавления в настройках бота
+        $this->botMan->hears('/commands', function ($bot) use ($filter) {
+            $text = "help - list of available commands\n";
+
+            foreach ($this->commands as $command) {
+                if (!$filter || $filter($bot, $command)) {
+                    if ($command instanceof LocationCommand) {
+                        continue;
+                    }
+
+                    $text .= ltrim($command->name(), '/') . ' - ' . $command->description() . "\n";
+                }
+            }
+
+            $this->botMan->reply($text);
+        });
     }
 
     protected function registerExceptionsHandler()
@@ -121,12 +140,14 @@ class CommandsManager
             $bot->replyAll($e->getMessage());
         });
 
+        $this->botMan->exception(AuthorizationException::class, function ($e, BotMan $bot) {
+            $bot->replyAll($e->getMessage());
+        });
+
         $this->botMan->exception(Exception::class, function ($e, BotMan $bot) {
             $bot->replyAll(
                 config('app.debug') ? $e->getMessage() : 'Sorry, something went wrong'
             );
-
-            throw $e;
         });
     }
 }
