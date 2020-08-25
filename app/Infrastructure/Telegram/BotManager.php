@@ -24,7 +24,8 @@ class BotManager implements Contracts\BotManager
     /** @var Command[] */
     private array $roomCommands;
     private ApiContract $api;
-    private array $middleware;
+    private MiddlewareManager $middleware;
+    private array $matchers;
 
     public function __construct(
         ClientInterface $http,
@@ -32,15 +33,16 @@ class BotManager implements Contracts\BotManager
         string $managerToken,
         array $managerCommands = [],
         array $roomCommands = [],
-        array $middleware = []
-    )
-    {
+        array $middleware = [],
+        array $matchers = []
+    ) {
         $this->http = $http;
         $this->managerToken = $managerToken;
         $this->managerCommands = $managerCommands;
         $this->roomCommands = $roomCommands;
         $this->api = $api;
-        $this->middleware = $middleware;
+        $this->middleware = new MiddlewareManager($middleware);
+        $this->matchers = $matchers;
     }
 
     /**
@@ -55,7 +57,7 @@ class BotManager implements Contracts\BotManager
         return new ManagerBot(
             $botMan,
             new CommandsManager($botMan, $this->api, $this->managerCommands),
-            new MiddlewareManager($this->middleware)
+            $this->middleware
         );
     }
 
@@ -74,7 +76,7 @@ class BotManager implements Contracts\BotManager
             $this->api,
             $room,
             new CommandsManager($botMan, $this->api, $this->roomCommands),
-            new MiddlewareManager($this->middleware)
+            $this->middleware
         );
     }
 
@@ -149,7 +151,7 @@ class BotManager implements Contracts\BotManager
             ),
             $config,
             new FileStorage(storage_path('framework/cache')),
-            new CommandMatcher()
+            new CommandMatcher($this->matchers)
         );
     }
 }

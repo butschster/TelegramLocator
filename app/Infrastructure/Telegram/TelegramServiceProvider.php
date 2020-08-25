@@ -16,13 +16,18 @@ class TelegramServiceProvider extends ServiceProvider
         DriverManager::loadDriver(TelegramDriver::class);
 
         $this->app->singleton(BotManagerConstruct::class, function () {
+            $matchers = collect((array)config('telegram.matchers'))->map(function ($class) {
+                return $this->app[$class];
+            })->all();
+
             return new BotManager(
                 new Client(),
                 $this->app[ApiContract::class],
                 config('telegram.manager.token'),
-                (array) config('telegram.manager.commands'),
-                (array) config('telegram.room.commands'),
-                (array) config('telegram.middleware')
+                (array)config('telegram.manager.commands'),
+                (array)config('telegram.room.commands'),
+                (array)config('telegram.middleware'),
+                $matchers
             );
         });
 

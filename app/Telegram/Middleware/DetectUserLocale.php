@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Telegram\MIddleware;
+namespace App\Telegram\Middleware;
 
 use BotMan\BotMan\BotMan;
 use BotMan\BotMan\Interfaces\Middleware\Received;
