@@ -4,8 +4,9 @@ namespace App\Infrastructure\Telegram;
 
 abstract class ManagerCommand extends Command
 {
-    public function forManager(): bool
+    /** @inheritDoc */
+    public function group(): string
     {
-        return true;
+        return trans('app.command.for_manager');
     }
 }

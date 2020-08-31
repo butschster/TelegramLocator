@@ -2,7 +2,6 @@
 
 namespace App\Telegram\Room;
 
-use App\Infrastructure\Telegram\ManagerCommand;
 use App\Infrastructure\Telegram\StringInput;
 use App\Models\Room;
 use Hash;

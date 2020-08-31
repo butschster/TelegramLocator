@@ -5,7 +5,6 @@ namespace App\Infrastructure\Telegram;
 use App\Infrastructure\Telegram\Exceptions\NotEnoughArgumentsException;
 use Illuminate\Support\Facades\Validator;
 use InvalidArgumentException;
-use RuntimeException;
 use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Console\Input\InputDefinition;
 

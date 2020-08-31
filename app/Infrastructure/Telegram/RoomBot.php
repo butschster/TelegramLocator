@@ -6,6 +6,7 @@ use App\Infrastructure\Telegram\Contracts\Api as ApiContract;
 use App\Infrastructure\Telegram\Contracts\Command;
 use App\Models\Room;
 use BotMan\BotMan\BotMan;
+use Illuminate\Auth\Access\AuthorizationException;
 
 class RoomBot implements Contracts\Bot
 {
@@ -27,20 +28,14 @@ class RoomBot implements Contracts\Bot
     public function handleCommand(): void
     {
         $this->middleware->register($this->botMan);
-        $this->commands->listen(function (BotMan $botMan, Command $command) {
-
-            // Если команды имеют флаг "Только для менеджера", то обычный
-            // пользователь не может их видеть и выполнять
-            return !$command->forManager()
-                || (
-                    $command->forManager()
-                    && $this->room->isOwner($command->getUser())
-                );
-
-        }, function (Command $command, StringInput $args) {
-
+        $this->commands->listen(function (Command $command, StringInput $args) {
             // Добавляем в аргументы объект комнаты
             $args->setArgument('room', $this->room);
+
+            if (!$command->isAllow($args)) {
+                throw new AuthorizationException();
+            }
+
             $command->handle($args);
 
         });

@@ -32,10 +32,17 @@ interface Command
     public function description(): string;
 
     /**
-     * Доступ только для владельца
+     * Группа
+     * @return string
+     */
+    public function group(): string;
+
+    /**
+     * Проврека доступа
+     * @param StringInput $input
      * @return bool
      */
-    public function forManager(): bool;
+    public function isAllow(StringInput $input): bool;
 
     /**
      * Запуск команды

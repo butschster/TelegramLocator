@@ -3,7 +3,6 @@
 namespace App\Telegram\Room;
 
 use App\Http\Resources\RoomPointResource;
-use App\Infrastructure\Telegram\ManagerCommand;
 use App\Infrastructure\Telegram\StringInput;
 use App\Models\Room;
 use Illuminate\Support\Facades\Storage;

@@ -2,7 +2,6 @@
 
 namespace App\Telegram\Room;
 
-use App\Infrastructure\Telegram\Command;
 use App\Infrastructure\Telegram\LocationCommand;
 use App\Infrastructure\Telegram\StringInput;
 use App\Jobs\Points\StorePoint;

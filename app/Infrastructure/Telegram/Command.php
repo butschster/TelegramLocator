@@ -29,9 +29,15 @@ abstract class Command implements Contracts\Command
     }
 
     /** @inheritDoc */
-    public function forManager(): bool
+    public function group(): string
     {
-        return false;
+        return trans('app.command.for_user');
+    }
+
+    /** @inheritDoc */
+    public function isAllow(StringInput $input): bool
+    {
+        return true;
     }
 
     /**
