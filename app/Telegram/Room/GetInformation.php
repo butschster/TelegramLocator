@@ -5,7 +5,6 @@ namespace App\Telegram\Room;
 use App\Infrastructure\Telegram\Command;
 use App\Infrastructure\Telegram\StringInput;
 use App\Models\Room;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Gate;
 
@@ -40,11 +39,14 @@ class GetInformation extends Command
         }
 
         $this->bot->reply(
-            collect($information)->map(function ($value, $key) {
-                $key = trans('app.command.get_info.field.' . $key);
+            collect($information)
+                ->filter()
+                ->map(function ($value, $key) {
+                    $key = trans('app.command.get_info.field.' . $key);
 
-                return "{$key}: *{$value}*";
-            })->implode("\n")
+                    return "{$key}: *{$value}*";
+                })
+                ->implode("\n")
         );
     }
 

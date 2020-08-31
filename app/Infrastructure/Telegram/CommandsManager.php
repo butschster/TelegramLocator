@@ -3,6 +3,7 @@
 namespace App\Infrastructure\Telegram;
 
 use App\Infrastructure\Telegram\Contracts\Api as ApiContract;
+use App\Infrastructure\Telegram\Exceptions\NotEnoughArgumentsException;
 use BotMan\BotMan\BotMan;
 use BotMan\BotMan\Messages\Attachments\Attachment;
 use Closure;
@@ -136,6 +137,14 @@ class CommandsManager
             })->implode("\n");
 
             $bot->reply(sprintf("*%s*\n```\n%s\n```", trans('app.command.invalid_data'), $errors));
+        });
+
+        $this->botMan->exception(NotEnoughArgumentsException::class, function ($e, BotMan $bot) {
+            $arguments = collect($e->getArguments())->map(function (string $arg) {
+                return ' - ' . $arg;
+            })->implode("\n");
+
+            $bot->replyAll(sprintf("*%s*\n```\n%s\n```", trans('app.command.not_enough_arguments'), $arguments));
         });
 
         $this->botMan->exception(AuthorizationException::class, function ($e, BotMan $bot) {

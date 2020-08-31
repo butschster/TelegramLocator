@@ -2,8 +2,10 @@
 
 namespace App\Infrastructure\Telegram;
 
+use App\Infrastructure\Telegram\Exceptions\NotEnoughArgumentsException;
 use Illuminate\Support\Facades\Validator;
 use InvalidArgumentException;
+use RuntimeException;
 use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Console\Input\InputDefinition;
 
@@ -91,5 +93,24 @@ class StringInput extends ArgvInput
     public function validateCommand(Contracts\Command $command)
     {
         Validator::make($this->getArguments(), $command->argsRules())->validate();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function validate()
+    {
+        $definition = $this->definition;
+        $givenArguments = $this->arguments;
+
+        $missingArguments = array_filter(array_keys($definition->getArguments()), function ($argument) use ($definition, $givenArguments) {
+            return !\array_key_exists($argument, $givenArguments) && $definition->getArgument($argument)->isRequired();
+        });
+
+        if (\count($missingArguments) > 0) {
+            throw new NotEnoughArgumentsException(
+                'Not enough arguments', $missingArguments
+            );
+        }
     }
 }

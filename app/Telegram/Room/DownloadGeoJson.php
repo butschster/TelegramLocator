@@ -33,7 +33,7 @@ class DownloadGeoJson extends ManagerCommand
         ];
 
         $storage = Storage::cloud();
-        $filename = $room->uuid . '.json';
+        $filename = sha1($room->uuid) . '.json';
         $storage->put($filename, json_encode($data));
 
         $sharedLinks = $storage->getAdapter()->getClient()->listSharedLinks($filename);
