@@ -49,7 +49,8 @@ class Room extends Model
     protected $guarded = ['uuid'];
 
     protected $casts = [
-        'points_lifetime' => 'int'
+        'points_lifetime' => 'int',
+        'jitter' => 0
     ];
 
     /**

@@ -4,18 +4,19 @@ namespace App\Infrastructure\Telegram\Contracts;
 
 use App\Models\Room;
 use App\Models\User;
+use GuzzleHttp\Exception\GuzzleException;
 
 interface BotManager
 {
     /**
-     * Получение телеграм бота для менеджеров
+     * Создание бота для менеджера
      *
      * @return Bot
      */
     public function forManager(): Bot;
 
     /**
-     * Получение телеграм бота для комнаты
+     * Создание бота для комнаты
      *
      * @param Room $room
      * @return Bot
@@ -23,15 +24,16 @@ interface BotManager
     public function forRoom(Room $room): Bot;
 
     /**
-     * Регистрация телеграм бота для комнаты
+     * Регистрация вебхука для комнаты
      * @param Room $room
      * @return string
+     * @throws GuzzleException
      */
     public function registerWebhookForRoom(Room $room): string;
 
     /**
-     * Регистрация телеграм бота для менеджеров
-     * @return string
+     * Регистрация вебхука для менеджера
+     * @throws GuzzleException
      */
     public function registerWebhookForManager(): string;
 }

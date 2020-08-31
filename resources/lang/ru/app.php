@@ -57,6 +57,27 @@ return [
         ],
         'get_info' => [
             'description' => 'Получение информации о комнате',
+            'field' => [
+                'id' => 'ID',
+                'title' => 'Название',
+                'description' => 'Описание',
+                'total_points' => 'Кол-во точек',
+                'points_lifetime' => 'Время жизни координаты',
+                'points_noise' => 'Шум в координатах',
+                'anonymous' => 'Анонимный',
+                'public' => 'Публичный',
+                'password_required' => 'Требуется пароль',
+                'last_activity' => 'Последняя активность',
+                'points_geojson_url' => 'GeoJson',
+                'points_map_url' => 'Карта',
+            ],
+            'value' => [
+                'points_lifetime' => ':hours ч.',
+                'points_lifetime_infinitely' => 'бесконечно',
+                'points_noise' => ':jitter м.',
+                'yes' => 'Да',
+                'no' => 'Нет',
+            ],
         ],
         'make_anonymous' => [
             'description' => 'Сделать комнату анонимной',
@@ -77,6 +98,11 @@ return [
         'set_password' => [
             'description' => 'Установить пароль для комнаты',
             'password' => 'Пароль',
+            'updated' => 'Готово.'
+        ],
+        'set_jitter' => [
+            'description' => 'Добавление шума в передаваемые координаты',
+            'jitter' => 'Радиус в метрах',
             'updated' => 'Готово.'
         ],
         'set_points_lifetime' => [
@@ -108,6 +134,6 @@ return [
             'message' => 'Текст сообщения.',
             'sent' => 'Ваше сообщение было отправлено.',
             'point_not_found' => 'Для начала вы должны отправить ваше местоположение'
-        ]
-    ]
+        ],
+    ],
 ];

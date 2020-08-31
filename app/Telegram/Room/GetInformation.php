@@ -27,17 +27,22 @@ class GetInformation extends Command
         $room = $input->getArgument('room');
         $this->checkAuthentication($room);
 
-        $information = Cache::remember('room:info:' . $room->uuid, now()->addMinute(), function () use ($room) {
-            return $this->getInformation($room);
-        });
+        $information = Cache::remember(
+            'room:info:' . $room->uuid . ':' . app()->getLocale(),
+            now()->addMinute(), function () use ($room) {
+                return $this->getInformation($room);
+            }
+        );
 
         if ($room->hasAccess($this->getUser()) && Gate::allows('show', $room)) {
-            $information['Points GeoJson'] = route('room.points', $room);
-            $information['Points map'] = route('map', $room);
+            $information['points_geojson_url'] = route('room.points', $room);
+            $information['points_map_url'] = route('map', $room);
         }
 
         $this->bot->reply(
             collect($information)->map(function ($value, $key) {
+                $key = trans('app.command.get_info.field.' . $key);
+
                 return "{$key}: *{$value}*";
             })->implode("\n")
         );
@@ -46,17 +51,31 @@ class GetInformation extends Command
     protected function getInformation(Room $room): array
     {
         return [
-            'ID' => $room->uuid,
-            'Title' => $room->title,
-            'Description' => $room->description,
-            'Total points' => Room\Point::getForRoom($room)->count(),
-            'Points lifetime' => $room->points_lifetime > 0
-                ? $room->points_lifetime . ' hrs.'
-                : 'infinitely',
-            'Anonymous' => $room->is_anonymous ? 'Yes' : 'No',
-            'Public' => $room->is_public ? 'Yes' : 'No',
-            'Password required' => $room->hasPassword() ? 'Yes' : 'No',
-            'Last activity' => $room->lastActivity()
+            'title' => $room->title,
+
+            'description' => $room->description,
+
+            'total_points' => Room\Point::getForRoom($room)->count(),
+
+            'points_lifetime' => $room->points_lifetime > 0
+                ? trans('app.command.get_info.value.points_lifetime', ['hours' => $room->points_lifetime])
+                : trans('app.command.get_info.value.points_lifetime_infinitely'),
+
+            'points_noise' => trans('app.command.get_info.value.points_noise', ['jitter' => $room->jitter]),
+
+            'anonymous' => $room->is_anonymous
+                ? trans('app.command.get_info.value.yes')
+                : trans('app.command.get_info.value.no'),
+
+            'public' => $room->is_public
+                ? trans('app.command.get_info.value.yes')
+                : trans('app.command.get_info.value.no'),
+
+            'password_required' => $room->hasPassword()
+                ? trans('app.command.get_info.value.yes')
+                : trans('app.command.get_info.value.no'),
+
+            'last_activity' => $room->lastActivity()
         ];
     }
 }

@@ -2,7 +2,9 @@
 
 namespace App\Models\Room;
 
+use App\Geo\Jitter;
 use App\Infrastructure\Telegram\User;
+use App\Models\Casts\Location as LocationCast;
 use App\Models\Room;
 use BotMan\BotMan\Messages\Attachments\Location;
 use Illuminate\Database\Eloquent\Builder;
@@ -12,6 +14,7 @@ use MStaack\LaravelPostgis\Geometries\Point as GeoPoint;
 
 class Point extends Model
 {
+
     /**
      * Получение списка точек, проставленных за последние 24 часа
      *
@@ -58,11 +61,17 @@ class Point extends Model
      */
     public static function storeForRoom(Room $room, User $user, Location $location): self
     {
+        $point = new GeoPoint($location->getLatitude(), $location->getLongitude());
+
+        if ($room->jitter > 0) {
+            $point = new Jitter($point, $room->jitter);
+        }
+
         return static::updateOrCreate([
             'room_uuid' => $room->uuid,
             'owner_hash' => $user->getHash(),
         ], [
-            'location' => new GeoPoint($location->getLatitude(), $location->getLongitude()),
+            'location' => $point,
             'username' => $room->is_anonymous
                 ? null
                 : $user->getUsername()
@@ -72,6 +81,9 @@ class Point extends Model
     protected $collection = 'room_points';
     protected $connection = 'mongodb';
     protected $guarded = [];
+    protected $casts = [
+        'location' => LocationCast::class,
+    ];
 
     /**
      * Фильтрация точек по комнате
@@ -98,28 +110,5 @@ class Point extends Model
         }
 
         $builder->latest('updated_at');
-    }
-
-    /**
-     * Добавление локации
-     * @param GeoPoint $point
-     */
-    public function setLocationAttribute(GeoPoint $point): void
-    {
-        $this->attributes['location'] = [
-            $point->getLat(), $point->getLng()
-        ];
-    }
-
-    /**
-     * Получение локации
-     * @param array $data
-     * @return GeoPoint
-     */
-    public function getLocationAttribute(array $data)
-    {
-        return new GeoPoint(
-            $data[0], $data[1]
-        );
     }
 }

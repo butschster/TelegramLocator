@@ -58,6 +58,27 @@ return [
         ],
         'get_info' => [
             'description' => 'Get information about room',
+            'field' => [
+                'id' => 'ID',
+                'title' => 'Title',
+                'description' => 'Description',
+                'total_points' => 'Total points',
+                'points_lifetime' => 'Points lifetime',
+                'points_noise' => 'Points noise',
+                'anonymous' => 'Is anonymous',
+                'public' => 'Is public',
+                'password_required' => 'Is password required',
+                'last_activity' => 'Last activity',
+                'points_geojson_url' => 'Points GeoJson URL',
+                'points_map_url' => 'Map URL',
+            ],
+            'value' => [
+                'points_lifetime' => ':hours hrs.',
+                'points_lifetime_infinitely' => 'infinitely',
+                'points_noise' => ':jitter m.',
+                'yes' => 'Yes',
+                'no' => 'No',
+            ],
         ],
         'make_anonymous' => [
             'description' => 'Make room anonymous',
@@ -79,6 +100,11 @@ return [
             'description' => 'Set room password',
             'password' => 'Room password',
             'updated' => 'Password for room set.'
+        ],
+        'set_jitter' => [
+            'description' => 'Add noise to lat,long',
+            'jitter' => 'Radius (m.)',
+            'updated' => 'Done.'
         ],
         'set_points_lifetime' => [
             'description' => 'Set room points lifetime.',
@@ -109,6 +135,6 @@ return [
             'message' => 'Your message.',
             'sent' => 'Your message was sent.',
             'point_not_found' => 'At first you should send your location'
-        ]
-    ]
+        ],
+    ],
 ];

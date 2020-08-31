@@ -41,6 +41,7 @@ return [
             App\Telegram\Room\MakePublic::class,
             App\Telegram\Room\DownloadGeoJson::class,
             App\Telegram\Room\SetPassword::class,
+            App\Telegram\Room\SetJitter::class,
             App\Telegram\Room\RemovePassword::class,
             App\Telegram\Room\SetPointsLifeTime::class,
             App\Telegram\Room\AuthUser::class,

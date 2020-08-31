@@ -45,11 +45,6 @@ class BotManager implements Contracts\BotManager
         $this->matchers = $matchers;
     }
 
-    /**
-     * Создание бота для менеджера
-     *
-     * @return Contracts\Bot
-     */
     public function forManager(): Contracts\Bot
     {
         $botMan = $this->createBotManInstance($this->managerToken);
@@ -61,12 +56,6 @@ class BotManager implements Contracts\BotManager
         );
     }
 
-    /**
-     * Создание бота для комнаты
-     *
-     * @param Room $room
-     * @return Contracts\Bot
-     */
     public function forRoom(Room $room): Contracts\Bot
     {
         $botMan = $this->createBotManInstance($room->telegram_token);
@@ -80,12 +69,6 @@ class BotManager implements Contracts\BotManager
         );
     }
 
-    /**
-     * Регистрация вебхука для комнаты
-     * @param Room $room
-     * @return string
-     * @throws GuzzleException
-     */
     public function registerWebhookForRoom(Room $room): string
     {
         return $this->registerWebhook(
@@ -94,10 +77,6 @@ class BotManager implements Contracts\BotManager
         );
     }
 
-    /**
-     * Регистрация вебхука для менеджера
-     * @throws GuzzleException
-     */
     public function registerWebhookForManager(): string
     {
         return $this->registerWebhook(
@@ -127,7 +106,6 @@ class BotManager implements Contracts\BotManager
     }
 
     /**
-     *
      * @param string $token
      * @return BotMan
      */
