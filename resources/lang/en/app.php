@@ -14,8 +14,11 @@ return [
             'register_required' => 'You should register an account. Use /register command.',
             'register' => 'Register as a manager',
             'account_exists' => 'Your account has been already registered.',
-            'registered' => 'Hello :username! Welcome to our service! We appreciate your privacy and that\'s why we don\'t
-            store any information about you. Now you can create rooms and share its with your community.'
+            'registered' => <<<EOL
+Hello :username! Welcome to our service! We appreciate your privacy and that\'s why we don\'t store any information about you.
+Now you can create rooms and share its with your community.
+EOL
+
         ],
         'user' => [
             'unauthorized' => 'Unauthorized! Please use /auth for authentication.',
