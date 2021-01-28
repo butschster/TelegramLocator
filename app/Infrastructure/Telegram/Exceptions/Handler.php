@@ -36,6 +36,8 @@ class Handler
 
     private function showError(Throwable $e)
     {
+        report($e);
+
         $this->send(
             config('app.debug')
                 ? $e->getMessage()

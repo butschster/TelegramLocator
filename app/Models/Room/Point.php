@@ -64,7 +64,7 @@ class Point extends Model
         $point = new GeoPoint($location->getLatitude(), $location->getLongitude());
 
         if ($room->jitter > 0) {
-            $point = new Jitter($point, $room->jitter);
+            $point = (new Jitter($point, $room->jitter))->make();
         }
 
         return static::updateOrCreate([

@@ -19,6 +19,7 @@ abstract class Command implements Contracts\Command
     protected ?string $name = null;
     private ?TelegramUser $user = null;
     protected Contracts\Api $api;
+    protected bool $showHelp = true;
 
     public function __construct(BotMan $bot, Contracts\Api $api)
     {
@@ -109,6 +110,10 @@ abstract class Command implements Contracts\Command
     /** @inheritDoc */
     public function help(): string
     {
+        if (!$this->showHelp) {
+            return '';
+        }
+
         $command = "*{$this->description()}*\n```\n";
         $command .= sprintf(
             "%s %s\n",

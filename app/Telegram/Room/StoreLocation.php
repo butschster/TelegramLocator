@@ -25,20 +25,23 @@ class StoreLocation extends LocationCommand
         $this->checkAuthentication($room);
 
         $lock = $this->getUser()->getLock();
-        if ($lock->get()) {
-            dispatch(
-                new StorePoint($room->uuid, $this->getUser(), $location)
-            );
-            $this->bot->reply(
-                trans('app.command.store_user_location.stored', [
-                    'lat' => $location->getLatitude(),
-                    'lng' => $location->getLongitude()
-                ])
-            );
-        } else {
+        if (!$lock->get()) {
             $this->bot->reply(
                 trans('app.command.store_user_location.slow_down')
             );
+            return;
+
         }
+
+        dispatch(
+            new StorePoint($room->uuid, $this->getUser(), $location)
+        );
+
+        $this->bot->reply(
+            trans('app.command.store_user_location.stored', [
+                'lat' => $location->getLatitude(),
+                'lng' => $location->getLongitude()
+            ])
+        );
     }
 }

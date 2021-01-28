@@ -31,8 +31,10 @@ class Location implements CastsAttributes
     public function set($model, string $key, $value, array $attributes)
     {
         return [
-            $value->getLat(),
-            $value->getLng()
+            'location' => [
+                $value->getLat(),
+                $value->getLng()
+            ]
         ];
     }
 }

@@ -11,6 +11,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Throwable;
 
 class StorePoint implements ShouldQueue
 {
@@ -44,14 +45,9 @@ class StorePoint implements ShouldQueue
         );
     }
 
-    /**
-     * Handle a job failure.
-     *
-     * @param  Exception  $exception
-     * @return void
-     */
-    public function failed(Exception $exception)
+    public function failed(Throwable $exception)
     {
+        report($exception);
         $this->user->getLock()->release();
     }
 }

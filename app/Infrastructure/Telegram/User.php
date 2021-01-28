@@ -44,4 +44,12 @@ class User
     {
         return Cache::lock('user:' . $this->getHash(), $seconds);
     }
+
+    /**
+     * @return int
+     */
+    public function getUserId(): int
+    {
+        return $this->userId;
+    }
 }

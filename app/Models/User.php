@@ -41,7 +41,7 @@ class User extends Model
      * @var array
      */
     protected $fillable = [
-        'username', 'id'
+        'username', 'id', 'max_rooms'
     ];
 
     public function rooms(): HasMany

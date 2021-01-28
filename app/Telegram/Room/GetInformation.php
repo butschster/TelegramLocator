@@ -28,10 +28,13 @@ class GetInformation extends Command
 
         $information = Cache::remember(
             'room:info:' . $room->uuid . ':' . app()->getLocale(),
-            now()->addMinute(), function () use ($room) {
+            now()->addMinute(),
+            function () use ($room) {
                 return $this->getInformation($room);
             }
         );
+
+        $information['signature'] = $room->signature($this->getUser()->getHash());
 
         if ($room->hasAccess($this->getUser()) && Gate::allows('show', $room)) {
             $information['points_geojson_url'] = route('room.points', $room);
@@ -77,7 +80,9 @@ class GetInformation extends Command
                 ? trans('app.command.get_info.value.yes')
                 : trans('app.command.get_info.value.no'),
 
-            'last_activity' => $room->lastActivity()
+            'last_activity' => $room->lastActivity(),
+
+            'id' => $room->getKey(),
         ];
     }
 }

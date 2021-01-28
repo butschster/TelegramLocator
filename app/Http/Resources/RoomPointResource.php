@@ -20,7 +20,7 @@ class RoomPointResource extends JsonResource
     {
         $properties = [];
 
-        if (!empty($this->resource->username)) {
+        if (!$request->is_anonymous && !empty($this->resource->username)) {
             $properties['username'] = $this->resource->username;
         }
 

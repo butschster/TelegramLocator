@@ -14,7 +14,8 @@ return [
             'register_required' => 'You should register an account. Use /register command.',
             'register' => 'Register as a manager',
             'account_exists' => 'Your account has been already registered.',
-            'registered' => 'Hello :username! Welcome to our service! We appreciate your privacy and that\'s why we don\'t store any information about you.'
+            'registered' => 'Hello :username! Welcome to our service! We appreciate your privacy and that\'s why we don\'t
+            store any information about you. Now you can create rooms and share its with your community.'
         ],
         'user' => [
             'unauthorized' => 'Unauthorized! Please use /auth for authentication.',
@@ -33,13 +34,21 @@ return [
             'token' => 'Telegram bot API token',
             'room_exists' => 'Room with given token exists.',
             'invalid_token' => 'Invalid telegram bot token. Please try again!',
-            'registered' => 'Room @:name successful registered.'
+            'registered' => 'Room @:name successful registered. You can create :total more rooms.',
+            'reached_max_rooms' => 'You\'ve reached max amount of rooms (:max). You can delete old rooms or send request to increase max amount of rooms.'
         ],
         'delete_room' => [
             'description' => 'Delete room and all points',
             'token' => 'Telegram bot API token',
             'deleted' => 'Room deleted.',
             'room_not_found' => 'Room not found.'
+        ],
+        'check_signature' => [
+            'signature' => 'Room signature.',
+            'description' => 'This command will help you checking room belonging to our service. Use /info command in your room to get signature.',
+            'valid' => 'Room signature is valid.',
+            'invalid' => 'This signature is not valid. Don\'t use this room.',
+            'out_of_date' => 'This signature is out of date. If you got it just now from room info, then dont\'t use this room.'
         ],
         'search_nearest_room' => [
             'description' => 'Search public rooms in 1km radius near by coordinates',
@@ -72,6 +81,7 @@ return [
                 'last_activity' => 'Last activity',
                 'points_geojson_url' => 'Points GeoJson URL',
                 'points_map_url' => 'Map URL',
+                'signature' => 'Signature'
             ],
             'value' => [
                 'points_lifetime' => ':hours hrs.',
@@ -137,5 +147,15 @@ return [
             'sent' => 'Your message was sent.',
             'point_not_found' => 'At first you should send your location'
         ],
+        'start' => [
+            'message' => <<<EOL
+Hello, :username! This is :type room, where you can share your location with other users from this room.
+First of all you should know signature of this room: `:signature`
+You can check it with :bot.
+Use /info command to get information about room.
+Use /help command to get commands list.
+EOL
+
+        ]
     ],
 ];

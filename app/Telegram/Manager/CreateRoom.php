@@ -38,6 +38,17 @@ class CreateRoom extends ManagerCommand
             return;
         }
 
+        $maxRooms = $this->getManager()->max_rooms;
+        $totalRooms = $this->getManager()->rooms()->count();
+        $availableRooms = $maxRooms - $totalRooms;
+
+        if ($totalRooms >= $maxRooms) {
+            $this->bot->reply(
+                trans('app.command.create_room.reached_max_rooms', ['max' => $maxRooms, 'total' => $totalRooms])
+            );
+            return;
+        }
+
         try {
             $bot = $this->api->getMe($token);
         } catch (TelegramSDKException $e) {
@@ -57,7 +68,11 @@ class CreateRoom extends ManagerCommand
             app(BotManager::class)->registerWebhookForRoom($room);
 
             $this->bot->reply(
-                trans('app.command.create_room.registered', ['name' => $room->name])
+                trans('app.command.create_room.registered', [
+                    'name' => $room->name,
+                    'max' => $maxRooms,
+                    'total' => $availableRooms - 1
+                ])
             );
         } catch (TelegramWebhookException $e) {
             $this->bot->reply(

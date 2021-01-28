@@ -6,6 +6,7 @@ use App\Infrastructure\Telegram\User as TelegramUser;
 use App\Models\Concerns\UsesUuid;
 use App\Models\Concerns\WithLocation;
 use App\Models\Room\Point;
+use App\RoomSignatureManager;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -142,5 +143,10 @@ class Room extends Model
                 'room_uuid' => $this->uuid,
                 'user_hash' => $user->getHash()
             ]);
+    }
+
+    public function signature(string $hash): string
+    {
+        return app(RoomSignatureManager::class)->createSign($this->getKey(), $hash);
     }
 }

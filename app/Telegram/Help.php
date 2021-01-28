@@ -8,6 +8,8 @@ use Illuminate\Support\Collection;
 
 class Help extends Command
 {
+    protected bool $showHelp = false;
+
     public function signature(): string
     {
         return '/help';

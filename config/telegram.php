@@ -24,12 +24,15 @@ return [
     */
     'manager' => [
         'token' => env('TELEGRAM_MANAGER_TOKEN'),
+        'bot_name' => env('TELEGRAM_MANAGER_BOT_NAME'),
+
         'commands' => [
             App\Telegram\Help::class,
             App\Telegram\Manager\RegisterUser::class,
             App\Telegram\Manager\CreateRoom::class,
             App\Telegram\Manager\DeleteRoom::class,
             App\Telegram\Manager\SearchNearestRoms::class,
+            App\Telegram\Manager\CheckRoomSignature::class,
             App\Telegram\Commands::class,
         ]
     ],
@@ -51,6 +54,7 @@ return [
             App\Telegram\Room\GetInformation::class,
             App\Telegram\Room\StoreLocation::class,
             App\Telegram\Room\SendMessage::class,
+            App\Telegram\Room\Start::class,
             App\Telegram\Commands::class,
         ]
     ],

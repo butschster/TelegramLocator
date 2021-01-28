@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\RoomPointCollection;
 use App\Http\Resources\RoomPointResource;
 use App\Infrastructure\Telegram\Contracts\BotManager;
 use App\Models\Room;
@@ -32,12 +33,12 @@ class TelegramController extends Controller
 
         return Cache::remember(
             'points:' . $room->uuid,
-            now()->addMinute(),
+            now()->addSecond(),
             function () use ($room, $request) {
                 $response = [
                     'type' => 'FeatureCollection',
-                    'features' => RoomPointResource::collection(
-                        Room\Point::getForRoom($room)
+                    'features' => RoomPointCollection::make(
+                        Room\Point::getForRoom($room), (bool) $room->is_anonymous
                     )->toArray($request),
                 ];
 

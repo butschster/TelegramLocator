@@ -15,7 +15,7 @@ add('shared_dirs', []);
 set('release_use_sudo', true);
 set('allow_anonymous_stats', false);
 
-host('142.93.171.85')
+host('167.71.49.192')
     ->port(22)
     ->user('root')
     ->set('branch', 'master')

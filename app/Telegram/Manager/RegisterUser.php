@@ -31,7 +31,8 @@ class RegisterUser extends Command
         }
 
         User::create([
-            'id' => $this->getUser()->getHash()
+            'id' => $this->getUser()->getHash(),
+            'max_rooms' => 3
         ]);
 
         $this->bot->reply(
